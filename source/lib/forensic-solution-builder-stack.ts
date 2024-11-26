@@ -719,7 +719,6 @@ export class ForensicsSolutionsConstructsStack extends Stack {
             value: this.vpc.vpcId,
         });
         vpcIDOutPut.node.addDependency(this.vpc);
-
     }
 
     private createAPI(

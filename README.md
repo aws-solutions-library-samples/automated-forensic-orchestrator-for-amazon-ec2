@@ -26,7 +26,7 @@ _Tools_
     -   https://docs.aws.amazon.com/cdk/latest/guide/home.html
 -   Forensic and Security Hub AWS accounts are bootstrapped with CDK bootstrapped
     -   https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html
--   nodejs version 16
+-   nodejs version 20
     -   https://docs.npmjs.com/getting-started
 -   Ensure GraphQL – AppSync is activated in the Forensic AWS account
 -   AWS Systems Manager (SSM) [agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html) installed on EC2
@@ -244,6 +244,7 @@ After successfully cloning the repository into your local development environmen
 |- LICENSE.txt                - required open source file for all solutions - should contain the Apache 2.0 license.
 |- NOTICE.txt                 - required open source file for all solutions - should contain references to all 3rd party libraries.
 |- README.md                  - required file for all solutions.
+|- SECURITY.md                - detailed information about reporting security issues.
 ```
 
 ---

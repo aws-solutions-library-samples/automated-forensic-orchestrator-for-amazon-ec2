@@ -9,1968 +9,491 @@ specific language governing permissions and limitations under the License.
 **********************
 THIRD PARTY COMPONENTS
 **********************
+
 This software includes third party software subject to the following copyrights:
 
-AWS SDK under the Apache License Version 2.0
+@aws-cdk/assert under the Apache-2.0 license.
+aws-cdk-lib under the Apache-2.0 license.
+@balena/dockerignore under the Apache-2.0 license.
+ajv under the MIT license.
+ansi-regex under the MIT license.
+ansi-styles under the MIT license.
+astral-regex under the MIT license.
+balanced-match under the MIT license.
+brace-expansion under the MIT license.
+case under the MIT license.
+color-convert under the MIT license.
+color-name under the MIT license.
+concat-map under the MIT license.
+emoji-regex under the MIT license.
+fast-deep-equal under the MIT license.
+fs-extra under the MIT license.
+graceful-fs under the ISC license.
+ignore under the MIT license.
+is-fullwidth-code-point under the MIT license.
+json-schema-traverse under the MIT license.
+jsonfile under the MIT license.
+jsonschema under the MIT license.
+lodash.truncate under the MIT license.
+lru-cache under the ISC license.
+minimatch under the ISC license.
+punycode under the MIT license.
+require-from-string under the MIT license.
+semver under the ISC license.
+slice-ansi under the MIT license.
+string-width under the MIT license.
+strip-ansi under the MIT license.
+table under the BSD-3-Clause license.
+universalify under the MIT license.
+uri-js under the BSD-2-Clause license.
+yallist under the ISC license.
+yaml under the ISC license.
+constructs under the Apache-2.0 license.
+@aws-cdk/asset-awscli-v1 under the Apache-2.0 license.
+@aws-cdk/asset-kubectl-v20 under the Apache-2.0 license.
+@aws-cdk/asset-node-proxy-agent-v5 under the Apache-2.0 license.
+jest under the MIT license.
+jest-cli under the MIT license.
+@jest/core under the MIT license.
+@jest/console under the MIT license.
+@jest/types under the MIT license.
+@jest/schemas under the MIT license.
+@sinclair/typebox under the MIT license.
+@types/istanbul-lib-coverage under the MIT license.
+@types/istanbul-reports under the MIT license.
+@types/istanbul-lib-report under the MIT license.
+@types/node under the MIT license.
+@types/yargs under the MIT license.
+@types/yargs-parser under the MIT license.
+chalk under the MIT license.
+supports-color under the MIT license.
+has-flag under the MIT license.
+jest-message-util under the MIT license.
+@babel/code-frame under the MIT license.
+@babel/highlight under the MIT license.
+escape-string-regexp under the MIT license.
+@babel/helper-validator-identifier under the MIT license.
+js-tokens under the MIT license.
+picocolors under the ISC license.
+@types/stack-utils under the MIT license.
+micromatch under the MIT license.
+braces under the MIT license.
+fill-range under the MIT license.
+to-regex-range under the MIT license.
+is-number under the MIT license.
+picomatch under the MIT license.
+pretty-format under the MIT license.
+react-is under the MIT license.
+slash under the MIT license.
+stack-utils under the MIT license.
+jest-util under the MIT license.
+ci-info under the MIT license.
+@jest/reporters under the MIT license.
+@bcoe/v8-coverage under the MIT license.
+@jest/test-result under the MIT license.
+collect-v8-coverage under the MIT license.
+@jest/transform under the MIT license.
+@babel/core under the MIT license.
+convert-source-map under the MIT license.
+@ampproject/remapping under the Apache-2.0 license.
+@jridgewell/gen-mapping under the MIT license.
+@jridgewell/set-array under the MIT license.
+@jridgewell/sourcemap-codec under the MIT license.
+@jridgewell/trace-mapping under the MIT license.
+@jridgewell/resolve-uri under the MIT license.
+@babel/generator under the MIT license.
+@babel/types under the MIT license.
+@babel/helper-string-parser under the MIT license.
+to-fast-properties under the MIT license.
+jsesc under the MIT license.
+@babel/helper-compilation-targets under the MIT license.
+@babel/compat-data under the MIT license.
+@babel/helper-validator-option under the MIT license.
+browserslist under the MIT license.
+caniuse-lite under the CC-BY-4.0 license.
+electron-to-chromium under the ISC license.
+node-releases under the MIT license.
+update-browserslist-db under the MIT license.
+escalade under the MIT license.
+@babel/helper-module-transforms under the MIT license.
+@babel/helper-environment-visitor under the MIT license.
+@babel/helper-module-imports under the MIT license.
+@babel/helper-simple-access under the MIT license.
+@babel/helper-split-export-declaration under the MIT license.
+@babel/template under the MIT license.
+@babel/parser under the MIT license.
+@babel/traverse under the MIT license.
+@babel/helper-function-name under the MIT license.
+@babel/helper-hoist-variables under the MIT license.
+debug under the MIT license.
+ms under the MIT license.
+globals under the MIT license.
+@babel/helpers under the MIT license.
+gensync under the MIT license.
+json5 under the MIT license.
+babel-plugin-istanbul under the BSD-3-Clause license.
+@babel/helper-plugin-utils under the MIT license.
+@istanbuljs/load-nyc-config under the ISC license.
+camelcase under the MIT license.
+find-up under the MIT license.
+locate-path under the MIT license.
+p-locate under the MIT license.
+p-limit under the MIT license.
+p-try under the MIT license.
+path-exists under the MIT license.
+get-package-type under the MIT license.
+js-yaml under the MIT license.
+argparse under the Python-2.0 license.
+sprintf-js under the BSD-3-Clause license.
+esprima under the BSD-2-Clause license.
+resolve-from under the MIT license.
+@istanbuljs/schema under the MIT license.
+istanbul-lib-instrument under the BSD-3-Clause license.
+istanbul-lib-coverage under the BSD-3-Clause license.
+test-exclude under the ISC license.
+glob under the ISC license.
+fs.realpath under the ISC license.
+inflight under the ISC license.
+once under the ISC license.
+wrappy under the ISC license.
+inherits under the ISC license.
+path-is-absolute under the MIT license.
+fast-json-stable-stringify under the MIT license.
+jest-haste-map under the MIT license.
+@types/graceful-fs under the MIT license.
+anymatch under the ISC license.
+normalize-path under the MIT license.
+fb-watchman under the Apache-2.0 license.
+bser under the Apache-2.0 license.
+node-int64 under the MIT license.
+jest-regex-util under the MIT license.
+jest-worker under the MIT license.
+merge-stream under the MIT license.
+walker under the Apache-2.0 license.
+makeerror under the BSD-3-Clause license.
+tmpl under the BSD-3-Clause license.
+fsevents under the MIT license.
+pirates under the MIT license.
+write-file-atomic under the ISC license.
+imurmurhash under the MIT license.
+signal-exit under the ISC license.
+exit under the MIT license.
+istanbul-lib-report under the BSD-3-Clause license.
+make-dir under the MIT license.
+istanbul-lib-source-maps under the BSD-3-Clause license.
+source-map under the BSD-3-Clause license.
+istanbul-reports under the BSD-3-Clause license.
+html-escaper under the MIT license.
+string-length under the MIT license.
+char-regex under the MIT license.
+v8-to-istanbul under the ISC license.
+ansi-escapes under the MIT license.
+type-fest under the MIT license.
+jest-changed-files under the MIT license.
+yocto-queue under the MIT license.
+execa under the MIT license.
+cross-spawn under the MIT license.
+path-key under the MIT license.
+shebang-command under the MIT license.
+shebang-regex under the MIT license.
+which under the ISC license.
+isexe under the ISC license.
+get-stream under the MIT license.
+human-signals under the Apache-2.0 license.
+is-stream under the MIT license.
+npm-run-path under the MIT license.
+onetime under the MIT license.
+mimic-fn under the MIT license.
+strip-final-newline under the MIT license.
+jest-config under the MIT license.
+ts-node under the MIT license.
+typescript under the Apache-2.0 license.
+@cspotcode/source-map-support under the MIT license.
+@tsconfig/node10 under the MIT license.
+@tsconfig/node12 under the MIT license.
+@tsconfig/node14 under the MIT license.
+@tsconfig/node16 under the MIT license.
+acorn under the MIT license.
+acorn-walk under the MIT license.
+arg under the MIT license.
+create-require under the MIT license.
+diff under the BSD-3-Clause license.
+make-error under the ISC license.
+v8-compile-cache-lib under the MIT license.
+yn under the MIT license.
+@jest/test-sequencer under the MIT license.
+babel-jest under the MIT license.
+@types/babel__core under the MIT license.
+@types/babel__generator under the MIT license.
+@types/babel__template under the MIT license.
+@types/babel__traverse under the MIT license.
+babel-preset-jest under the MIT license.
+babel-plugin-jest-hoist under the MIT license.
+babel-preset-current-node-syntax under the MIT license.
+@babel/plugin-syntax-async-generators under the MIT license.
+@babel/plugin-syntax-bigint under the MIT license.
+@babel/plugin-syntax-class-properties under the MIT license.
+@babel/plugin-syntax-import-meta under the MIT license.
+@babel/plugin-syntax-json-strings under the MIT license.
+@babel/plugin-syntax-logical-assignment-operators under the MIT license.
+@babel/plugin-syntax-nullish-coalescing-operator under the MIT license.
+@babel/plugin-syntax-numeric-separator under the MIT license.
+@babel/plugin-syntax-object-rest-spread under the MIT license.
+@babel/plugin-syntax-optional-catch-binding under the MIT license.
+@babel/plugin-syntax-optional-chaining under the MIT license.
+@babel/plugin-syntax-top-level-await under the MIT license.
+deepmerge under the MIT license.
+jest-circus under the MIT license.
+@jest/environment under the MIT license.
+@jest/fake-timers under the MIT license.
+@sinonjs/fake-timers under the BSD-3-Clause license.
+@sinonjs/commons under the BSD-3-Clause license.
+type-detect under the MIT license.
+jest-mock under the MIT license.
+@jest/expect under the MIT license.
+expect under the MIT license.
+@jest/expect-utils under the MIT license.
+jest-get-type under the MIT license.
+jest-matcher-utils under the MIT license.
+jest-diff under the MIT license.
+diff-sequences under the MIT license.
+jest-snapshot under the MIT license.
+@babel/plugin-syntax-jsx under the MIT license.
+@babel/plugin-syntax-typescript under the MIT license.
+@types/prettier under the MIT license.
+natural-compare under the MIT license.
+co under the MIT license.
+dedent under the MIT license.
+is-generator-fn under the MIT license.
+jest-each under the MIT license.
+jest-runtime under the MIT license.
+@jest/globals under the MIT license.
+@jest/source-map under the MIT license.
+callsites under the MIT license.
+cjs-module-lexer under the MIT license.
+jest-resolve under the MIT license.
+jest-pnp-resolver under the MIT license.
+jest-validate under the MIT license.
+leven under the MIT license.
+resolve under the MIT license.
+is-core-module under the MIT license.
+has under the MIT license.
+function-bind under the MIT license.
+path-parse under the MIT license.
+supports-preserve-symlinks-flag under the MIT license.
+resolve.exports under the MIT license.
+strip-bom under the MIT license.
+pure-rand under the MIT license.
+jest-environment-node under the MIT license.
+jest-runner under the MIT license.
+source-map-support under the MIT license.
+buffer-from under the MIT license.
+emittery under the MIT license.
+jest-docblock under the MIT license.
+detect-newline under the MIT license.
+jest-leak-detector under the MIT license.
+jest-watcher under the MIT license.
+parse-json under the MIT license.
+error-ex under the MIT license.
+is-arrayish under the MIT license.
+json-parse-even-better-errors under the MIT license.
+lines-and-columns under the MIT license.
+strip-json-comments under the MIT license.
+jest-resolve-dependencies under the MIT license.
+import-local under the MIT license.
+pkg-dir under the MIT license.
+resolve-cwd under the MIT license.
+prompts under the MIT license.
+kleur under the MIT license.
+sisteransi under the MIT license.
+yargs under the MIT license.
+cliui under the ISC license.
+wrap-ansi under the MIT license.
+get-caller-file under the ISC license.
+require-directory under the MIT license.
+y18n under the ISC license.
+yargs-parser under the ISC license.
+@aws-cdk/cloudformation-diff under the Apache-2.0 license.
+@aws-cdk/cfnspec under the Apache-2.0 license.
+at-least-node under the ISC license.
+md5 under the BSD-3-Clause license.
+charenc under the BSD-3-Clause license.
+crypt under the BSD-3-Clause license.
+is-buffer under the MIT license.
+@typescript-eslint/eslint-plugin under the MIT license.
+@typescript-eslint/parser under the BSD-2-Clause license.
+eslint under the MIT license.
+eslint-scope under the BSD-2-Clause license.
+esrecurse under the BSD-2-Clause license.
+estraverse under the BSD-2-Clause license.
+@eslint/eslintrc under the MIT license.
+espree under the BSD-2-Clause license.
+acorn-jsx under the MIT license.
+eslint-visitor-keys under the Apache-2.0 license.
+import-fresh under the MIT license.
+parent-module under the MIT license.
+@humanwhocodes/config-array under the Apache-2.0 license.
+@humanwhocodes/object-schema under the BSD-3-Clause license.
+doctrine under the Apache-2.0 license.
+esutils under the BSD-2-Clause license.
+eslint-utils under the MIT license.
+esquery under the BSD-3-Clause license.
+file-entry-cache under the MIT license.
+flat-cache under the MIT license.
+rimraf under the ISC license.
+flatted under the ISC license.
+functional-red-black-tree under the MIT license.
+glob-parent under the ISC license.
+is-glob under the MIT license.
+is-extglob under the MIT license.
+json-stable-stringify-without-jsonify under the MIT license.
+levn under the MIT license.
+prelude-ls under the MIT license.
+type-check under the MIT license.
+lodash.merge under the MIT license.
+optionator under the MIT license.
+@aashutoshrathi/word-wrap under the MIT license.
+deep-is under the MIT license.
+fast-levenshtein under the MIT license.
+regexpp under the MIT license.
+text-table under the MIT license.
+v8-compile-cache under the MIT license.
+@typescript-eslint/scope-manager under the MIT license.
+@typescript-eslint/types under the MIT license.
+@typescript-eslint/visitor-keys under the MIT license.
+@typescript-eslint/typescript-estree under the BSD-2-Clause license.
+globby under the MIT license.
+array-union under the MIT license.
+dir-glob under the MIT license.
+path-type under the MIT license.
+fast-glob under the MIT license.
+@nodelib/fs.stat under the MIT license.
+@nodelib/fs.walk under the MIT license.
+@nodelib/fs.scandir under the MIT license.
+run-parallel under the MIT license.
+queue-microtask under the MIT license.
+fastq under the ISC license.
+reusify under the MIT license.
+merge2 under the MIT license.
+tsutils under the MIT license.
+tslib under the 0BSD license.
+@typescript-eslint/type-utils under the MIT license.
+@typescript-eslint/utils under the MIT license.
+@types/json-schema under the MIT license.
+aws-cdk under the Apache-2.0 license.
+aws-sdk under the Apache-2.0 license.
+uuid under the MIT license.
+buffer under the MIT license.
+base64-js under the MIT license.
+ieee754 under the BSD-3-Clause license.
+isarray under the MIT license.
+events under the MIT license.
+jmespath under the MIT license.
+querystring under the MIT license.
+sax under the ISC license.
+url under the MIT license.
+util under the MIT license.
+is-arguments under the MIT license.
+call-bind under the MIT license.
+get-intrinsic under the MIT license.
+has-symbols under the MIT license.
+has-tostringtag under the MIT license.
+is-generator-function under the MIT license.
+is-typed-array under the MIT license.
+available-typed-arrays under the MIT license.
+for-each under the MIT license.
+is-callable under the MIT license.
+gopd under the MIT license.
+which-typed-array under the MIT license.
+xml2js under the MIT license.
+xmlbuilder under the MIT license.
+cdk-nag under the Apache-2.0 license.
+eslint-config-prettier under the MIT license.
+eslint-config-typescript under the MIT license.
+eslint-plugin-header under the MIT license.
+eslint-plugin-prettier under the MIT license.
+prettier under the MIT license.
+prettier-linter-helpers under the MIT license.
+fast-diff under the Apache-2.0 license.
+fs under the ISC license.
+jest-junit under the Apache-2.0 license.
+mkdirp under the MIT license.
+xml under the MIT license.
+ts-jest under the MIT license.
+bs-logger under the MIT license.
+lodash.memoize under the MIT license.
+@types/jest under the MIT license.
+@types/uuid under the MIT license.
+foreground-child under the ISC license.
+jackspeak under the BlueOak-1.0.0 license.
+@isaacs/cliui under the ISC license.
+eastasianwidth under the MIT license.
+@pkgjs/parseargs under the MIT license.
+minipass under the ISC license.
+path-scurry under the BlueOak-1.0.0 license.
+astroid under the LGPL-2.1-or-later license.
+black under the MIT license.
+certifi under the MPL-2.0 license.
+charset-normalizer under the MIT license.
+click under the 0BSD license.
+coverage under the Apache-2.0 license.
+dill under the 0BSD license.
+exceptiongroup under the MIT license.
+flake8 under the MIT license.
+idna under the 0BSD license.
+iniconfig under the MIT license.
+isort under the MIT license.
+mccabe under the MIT license.
+mypy under the MIT license.
+mypy-extensions under the MIT license.
+packaging under the Apache-2.0 license.
+pathspec under the MPL-2.0 license.
+platformdirs under the MIT license.
+pluggy under the MIT license.
+pycodestyle under the MIT license.
+pyflakes under the MIT license.
+pylint under the GPL-2.0-or-later license.
+pytest under the MIT license.
+requests under the Apache-2.0 license.
+tomli under the MIT license.
+tomlkit under the MIT license.
+types-requests under the Apache-2.0 license.
+types-urllib3 under the Apache-2.0 license.
+typing-extensions under the PSF-2.0 license.
+urllib3 under the MIT license.
+arnparse 
+aws-xray-sdk under the Apache-2.0 license.
+bandit under the Apache-2.0 license.
+boto3 under the Apache-2.0 license.
+botocore under the Apache-2.0 license.
+markdown-it-py under the MIT license.
+mdurl under the MIT license.
+pbr under the Apache-2.0 license.
+pygments under the 0BSD license.
+pytest-cov under the MIT license.
+pytest-env under the MIT license.
+pytest-mock under the MIT license.
+python-dateutil under the Apache-2.0 license.
+pyyaml under the MIT license.
+rich under the MIT license.
+s3transfer under the Apache-2.0 license.
+six under the MIT license.
+stevedore under the Apache-2.0 license.
+wrapt under the 0BSD license.
+ordereddictpython_version license unknown or missing
+requests-mock under the Apache-2.0 license.
 
-**********************
-Node Libraries
-**********************
+********************
+OPEN SOURCE LICENSES
+********************
 
-├─ @aws-cdk/assets@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/assets
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/assets/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/assets/NOTICE
-├─ @aws-cdk/aws-cloudwatch@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-cloudwatch
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-cloudwatch/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-cloudwatch/NOTICE
-├─ @aws-cdk/aws-codestar-alpha@2.0.0-alpha.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-codestar-alpha
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-codestar-alpha/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-codestar-alpha/NOTICE
-├─ @aws-cdk/aws-events@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-events
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-events/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-events/NOTICE
-├─ @aws-cdk/aws-iam@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-iam
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-iam/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-iam/NOTICE
-├─ @aws-cdk/aws-kms@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-kms
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-kms/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-kms/NOTICE
-├─ @aws-cdk/aws-logs@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-logs
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-logs/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-logs/NOTICE
-├─ @aws-cdk/aws-s3-assets@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-s3-assets
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-s3-assets/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-s3-assets/NOTICE
-├─ @aws-cdk/aws-s3@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/aws-s3
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/aws-s3/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/aws-s3/NOTICE
-├─ @aws-cdk/cfnspec@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cfnspec
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cfnspec/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cfnspec/NOTICE
-├─ @aws-cdk/cloud-assembly-schema@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/cloud-assembly-schema
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/cloud-assembly-schema/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/cloud-assembly-schema/NOTICE
-├─ @aws-cdk/cloud-assembly-schema@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cloud-assembly-schema
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cloud-assembly-schema/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cloud-assembly-schema/NOTICE
-├─ @aws-cdk/cloudformation-diff@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cloudformation-diff
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cloudformation-diff/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cloudformation-diff/NOTICE
-├─ @aws-cdk/core@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/core/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/core/NOTICE
-├─ @aws-cdk/cx-api@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/cx-api
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/cx-api/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/cx-api/NOTICE
-├─ @aws-cdk/cx-api@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cx-api
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cx-api/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/cx-api/NOTICE
-├─ @aws-cdk/region-info@1.138.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/region-info
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/region-info/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/region-info/NOTICE
-├─ @aws-cdk/region-info@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/region-info
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/region-info/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/@aws-cdk/region-info/NOTICE
-├─ @balena/dockerignore@1.0.2
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/balena-io-modules/dockerignore
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/@balena/dockerignore
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/@balena/dockerignore/LICENSE.md
-├─ @cspotcode/source-map-consumer@0.8.0
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/cspotcode/source-map
-│  ├─ publisher: Andrew Bradley
-│  ├─ email: cspotcode@gmail.com
-│  ├─ path: ./source/node_modules/@cspotcode/source-map-consumer
-│  └─ licenseFile: ./source/node_modules/@cspotcode/source-map-consumer/README.md
-├─ @cspotcode/source-map-support@0.6.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/cspotcode/node-source-map-support
-│  ├─ path: ./source/node_modules/@cspotcode/source-map-support
-│  └─ licenseFile: ./source/node_modules/@cspotcode/source-map-support/LICENSE.md
-├─ @jest/types@27.4.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/jest
-│  ├─ path: ./source/node_modules/@jest/types
-│  └─ licenseFile: ./source/node_modules/@jest/types/LICENSE
-├─ @jsii/check-node@1.52.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/jsii
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@jsii/check-node
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@jsii/check-node/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/@jsii/check-node/NOTICE
-├─ @tootallnate/once@1.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/once
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  └─ path: ./source/node_modules/@tootallnate/once
-├─ @tsconfig/node10@1.0.8
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/tsconfig/bases
-│  ├─ path: ./source/node_modules/@tsconfig/node10
-│  └─ licenseFile: ./source/node_modules/@tsconfig/node10/LICENSE
-├─ @tsconfig/node12@1.0.9
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/tsconfig/bases
-│  ├─ path: ./source/node_modules/@tsconfig/node12
-│  └─ licenseFile: ./source/node_modules/@tsconfig/node12/LICENSE
-├─ @tsconfig/node14@1.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/tsconfig/bases
-│  ├─ path: ./source/node_modules/@tsconfig/node14
-│  └─ licenseFile: ./source/node_modules/@tsconfig/node14/LICENSE
-├─ @tsconfig/node16@1.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/tsconfig/bases
-│  ├─ path: ./source/node_modules/@tsconfig/node16
-│  └─ licenseFile: ./source/node_modules/@tsconfig/node16/LICENSE
-├─ @types/istanbul-lib-coverage@2.0.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/istanbul-lib-coverage
-│  └─ licenseFile: ./source/node_modules/@types/istanbul-lib-coverage/LICENSE
-├─ @types/istanbul-lib-report@3.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/istanbul-lib-report
-│  └─ licenseFile: ./source/node_modules/@types/istanbul-lib-report/LICENSE
-├─ @types/istanbul-reports@3.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/istanbul-reports
-│  └─ licenseFile: ./source/node_modules/@types/istanbul-reports/LICENSE
-├─ @types/jest@27.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/jest
-│  └─ licenseFile: ./source/node_modules/@types/jest/LICENSE
-├─ @types/node@10.17.60
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/@types/node
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/@types/node/LICENSE
-├─ @types/node@16.11.9
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/node
-│  └─ licenseFile: ./source/node_modules/@types/node/LICENSE
-├─ @types/uuid@8.3.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/uuid
-│  └─ licenseFile: ./source/node_modules/@types/uuid/LICENSE
-├─ @types/yargs-parser@20.2.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/yargs-parser
-│  └─ licenseFile: ./source/node_modules/@types/yargs-parser/LICENSE
-├─ @types/yargs@16.0.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
-│  ├─ path: ./source/node_modules/@types/yargs
-│  └─ licenseFile: ./source/node_modules/@types/yargs/LICENSE
-├─ acorn-walk@8.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/acornjs/acorn
-│  ├─ path: ./source/node_modules/vm2/node_modules/acorn-walk
-│  └─ licenseFile: ./source/node_modules/vm2/node_modules/acorn-walk/LICENSE
-├─ acorn@8.7.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/acornjs/acorn
-│  ├─ path: ./source/node_modules/acorn
-│  └─ licenseFile: ./source/node_modules/acorn/LICENSE
-├─ agent-base@6.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-agent-base
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/agent-base
-│  └─ licenseFile: ./source/node_modules/agent-base/README.md
-├─ ajv@8.10.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/ajv-validator/ajv
-│  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ajv
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ajv/LICENSE
-├─ ansi-regex@5.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/ansi-regex
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/ansi-regex
-│  └─ licenseFile: ./source/node_modules/ansi-regex/license
-├─ ansi-styles@4.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/ansi-styles
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/ansi-styles
-│  └─ licenseFile: ./source/node_modules/ansi-styles/license
-├─ ansi-styles@5.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/ansi-styles
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: https://sindresorhus.com
-│  ├─ path: ./source/node_modules/pretty-format/node_modules/ansi-styles
-│  └─ licenseFile: ./source/node_modules/pretty-format/node_modules/ansi-styles/license
-├─ anymatch@3.1.2
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/micromatch/anymatch
-│  ├─ publisher: Elan Shanker
-│  ├─ url: https://github.com/es128
-│  ├─ path: ./source/node_modules/anymatch
-│  └─ licenseFile: ./source/node_modules/anymatch/LICENSE
-├─ archiver-utils@2.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/archiverjs/archiver-utils
-│  ├─ publisher: Chris Talkington
-│  ├─ url: http://christalkington.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/archiver-utils
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/archiver-utils/LICENSE
-├─ archiver@5.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/archiverjs/node-archiver
-│  ├─ publisher: Chris Talkington
-│  ├─ url: http://christalkington.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/archiver
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/archiver/LICENSE
-├─ arg@4.1.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/zeit/arg
-│  ├─ publisher: Josh Junon
-│  ├─ email: junon@zeit.co
-│  ├─ path: ./source/node_modules/arg
-│  └─ licenseFile: ./source/node_modules/arg/LICENSE.md
-├─ ast-types@0.13.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/benjamn/ast-types
-│  ├─ publisher: Ben Newman
-│  ├─ email: bn@cs.stanford.edu
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ast-types
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ast-types/LICENSE
-├─ astral-regex@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/kevva/astral-regex
-│  ├─ publisher: Kevin Mårtensson
-│  ├─ email: kevinmartensson@gmail.com
-│  ├─ url: github.com/kevva
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/astral-regex
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/astral-regex/license
-├─ async@3.2.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/caolan/async
-│  ├─ publisher: Caolan McMahon
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/async
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/async/LICENSE
-├─ at-least-node@1.0.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/RyanZim/at-least-node
-│  ├─ publisher: Ryan Zimmerman
-│  ├─ email: opensrc@ryanzim.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/at-least-node
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/at-least-node/LICENSE
-├─ aws-cdk-lib@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk-lib
-│  ├─ licenseFile: ./source/node_modules/aws-cdk-lib/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk-lib/NOTICE
-├─ aws-cdk@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/NOTICE
-├─ aws-sdk@2.1070.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-sdk-js
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/aws-sdk
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/aws-sdk/LICENSE.txt
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/aws-sdk/NOTICE.txt
-├─ aws-sdk@2.1087.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-sdk-js
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com/
-│  ├─ path: ./source/node_modules/aws-sdk
-│  ├─ licenseFile: ./source/node_modules/aws-sdk/LICENSE.txt
-│  └─ noticeFile: ./source/node_modules/aws-sdk/NOTICE.txt
-├─ balanced-match@1.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/juliangruber/balanced-match
-│  ├─ publisher: Julian Gruber
-│  ├─ email: mail@juliangruber.com
-│  ├─ url: http://juliangruber.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/balanced-match
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/balanced-match/LICENSE.md
-├─ base64-js@1.5.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/beatgammit/base64-js
-│  ├─ publisher: T. Jameson Little
-│  ├─ email: t.jameson.little@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/base64-js
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/base64-js/LICENSE
-├─ binary-extensions@2.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/binary-extensions
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/binary-extensions
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/binary-extensions/license
-├─ bl@4.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/rvagg/bl
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/bl
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/bl/LICENSE.md
-├─ brace-expansion@1.1.11
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/juliangruber/brace-expansion
-│  ├─ publisher: Julian Gruber
-│  ├─ email: mail@juliangruber.com
-│  ├─ url: http://juliangruber.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/brace-expansion
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/brace-expansion/LICENSE
-├─ braces@3.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/micromatch/braces
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/braces
-│  └─ licenseFile: ./source/node_modules/braces/LICENSE
-├─ bs-logger@0.2.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/huafu/bs-logger
-│  ├─ publisher: Huafu Gandon
-│  ├─ email: huafu.gandon@gmail.com
-│  ├─ path: ./source/node_modules/bs-logger
-│  └─ licenseFile: ./source/node_modules/bs-logger/LICENSE
-├─ buffer-crc32@0.2.13
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/brianloveswords/buffer-crc32
-│  ├─ publisher: Brian J. Brennan
-│  ├─ email: brianloveswords@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/buffer-crc32
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/buffer-crc32/LICENSE
-├─ buffer-from@1.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/LinusU/buffer-from
-│  ├─ path: ./source/node_modules/buffer-from
-│  └─ licenseFile: ./source/node_modules/buffer-from/LICENSE
-├─ buffer@4.9.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/feross/buffer
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: http://feross.org
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/aws-sdk/node_modules/buffer
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/aws-sdk/node_modules/buffer/LICENSE
-├─ buffer@5.7.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/feross/buffer
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: https://feross.org
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/buffer
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/buffer/LICENSE
-├─ bytes@3.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/visionmedia/bytes.js
-│  ├─ publisher: TJ Holowaychuk
-│  ├─ email: tj@vision-media.ca
-│  ├─ url: http://tjholowaychuk.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/bytes
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/bytes/LICENSE
-├─ camelcase@6.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/camelcase
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: https://sindresorhus.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/camelcase
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/camelcase/license
-├─ case@1.6.3
-│  ├─ licenses: (MIT OR GPL-3.0-or-later)
-│  ├─ repository: https://github.com/nbubna/Case
-│  ├─ publisher: Nathan Bubna
-│  ├─ email: nathan@esha.com
-│  ├─ url: http://www.esha.com/
-│  ├─ path: ./source/node_modules/aws-cdk-lib/node_modules/case
-│  └─ licenseFile: ./source/node_modules/aws-cdk-lib/node_modules/case/LICENSE
-├─ cdk-assets@2.12.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/aws-cdk
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets
-│  ├─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/LICENSE
-│  └─ noticeFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/NOTICE
-├─ cdk-nag@2.10.5
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/cdklabs/cdk-nag
-│  ├─ publisher: Arun Donti
-│  ├─ email: donti@amazon.com
-│  ├─ path: ./source/node_modules/cdk-nag
-│  ├─ licenseFile: ./source/node_modules/cdk-nag/LICENSE
-│  └─ noticeFile: ./source/node_modules/cdk-nag/NOTICE
-├─ chalk@4.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/chalk
-│  ├─ path: ./source/node_modules/chalk
-│  └─ licenseFile: ./source/node_modules/chalk/license
-├─ charenc@0.0.2
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/pvorb/node-charenc
-│  ├─ publisher: Paul Vorbach
-│  ├─ email: paul@vorb.de
-│  ├─ url: http://vorb.de
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/charenc
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/charenc/LICENSE.mkd
-├─ chokidar@3.5.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/paulmillr/chokidar
-│  ├─ publisher: Paul Miller
-│  ├─ url: https://paulmillr.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/chokidar
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/chokidar/LICENSE
-├─ ci-info@3.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/watson/ci-info
-│  ├─ publisher: Thomas Watson Steen
-│  ├─ email: w@tson.dk
-│  ├─ url: https://twitter.com/wa7son
-│  ├─ path: ./source/node_modules/ci-info
-│  └─ licenseFile: ./source/node_modules/ci-info/LICENSE
-├─ cli-color@2.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/cli-color
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cli-color
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cli-color/LICENSE
-├─ cliui@7.0.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/yargs/cliui
-│  ├─ publisher: Ben Coe
-│  ├─ email: ben@npmjs.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/cliui
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/cliui/LICENSE.txt
-├─ color-convert@2.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/Qix-/color-convert
-│  ├─ publisher: Heather Arthur
-│  ├─ email: fayearthur@gmail.com
-│  ├─ path: ./source/node_modules/color-convert
-│  └─ licenseFile: ./source/node_modules/color-convert/LICENSE
-├─ color-name@1.1.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/colorjs/color-name
-│  ├─ publisher: DY
-│  ├─ email: dfcreative@gmail.com
-│  ├─ path: ./source/node_modules/color-name
-│  └─ licenseFile: ./source/node_modules/color-name/LICENSE
-├─ compress-commons@4.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/archiverjs/node-compress-commons
-│  ├─ publisher: Chris Talkington
-│  ├─ url: http://christalkington.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/compress-commons
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/compress-commons/LICENSE
-├─ concat-map@0.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/substack/node-concat-map
-│  ├─ publisher: James Halliday
-│  ├─ email: mail@substack.net
-│  ├─ url: http://substack.net
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/concat-map
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/concat-map/LICENSE
-├─ constructs@10.0.26
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/constructs
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/constructs
-│  ├─ licenseFile: ./source/node_modules/constructs/LICENSE
-│  └─ noticeFile: ./source/node_modules/constructs/NOTICE
-├─ constructs@3.3.181
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/aws/constructs
-│  ├─ publisher: Amazon Web Services
-│  ├─ url: https://aws.amazon.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/constructs
-│  ├─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/constructs/LICENSE
-│  └─ noticeFile: ./source/node_modules/@aws-cdk/core/node_modules/constructs/NOTICE
-├─ core-util-is@1.0.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/isaacs/core-util-is
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/core-util-is
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/core-util-is/LICENSE
-├─ crc-32@1.2.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/SheetJS/js-crc32
-│  ├─ publisher: sheetjs
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/crc-32
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/crc-32/LICENSE
-├─ crc32-stream@4.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/archiverjs/node-crc32-stream
-│  ├─ publisher: Chris Talkington
-│  ├─ url: http://christalkington.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/crc32-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/crc32-stream/LICENSE
-├─ create-require@1.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/nuxt-contrib/create-require
-│  ├─ path: ./source/node_modules/create-require
-│  └─ licenseFile: ./source/node_modules/create-require/LICENSE
-├─ crypt@0.0.2
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/pvorb/node-crypt
-│  ├─ publisher: Paul Vorbach
-│  ├─ email: paul@vorb.de
-│  ├─ url: http://vorb.de
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/crypt
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/crypt/LICENSE.mkd
-├─ d@1.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/d
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/d
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/d/LICENSE
-├─ data-uri-to-buffer@3.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-data-uri-to-buffer
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/data-uri-to-buffer
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/data-uri-to-buffer/README.md
-├─ debug@4.3.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/debug-js/debug
-│  ├─ publisher: Josh Junon
-│  ├─ email: josh.junon@protonmail.com
-│  ├─ path: ./source/node_modules/debug
-│  └─ licenseFile: ./source/node_modules/debug/LICENSE
-├─ decamelize@5.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/decamelize
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: https://sindresorhus.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/decamelize
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/decamelize/license
-├─ deep-is@0.1.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/thlorenz/deep-is
-│  ├─ publisher: Thorsten Lorenz
-│  ├─ email: thlorenz@gmx.de
-│  ├─ url: http://thlorenz.com
-│  ├─ path: ./source/node_modules/deep-is
-│  └─ licenseFile: ./source/node_modules/deep-is/LICENSE
-├─ degenerator@3.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-degenerator
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/degenerator
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/degenerator/README.md
-├─ depd@1.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/dougwilson/nodejs-depd
-│  ├─ publisher: Douglas Christopher Wilson
-│  ├─ email: doug@somethingdoug.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/depd
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/depd/LICENSE
-├─ diff-sequences@27.4.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/jest
-│  ├─ path: ./source/node_modules/diff-sequences
-│  └─ licenseFile: ./source/node_modules/diff-sequences/LICENSE
-├─ diff@4.0.2
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/kpdecker/jsdiff
-│  ├─ path: ./source/node_modules/diff
-│  └─ licenseFile: ./source/node_modules/diff/LICENSE
-├─ diff@5.0.0
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/kpdecker/jsdiff
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/diff
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/diff/LICENSE
-├─ difflib@0.2.4
-│  ├─ licenses: PSF
-│  ├─ repository: https://github.com/qiao/difflib.js
-│  ├─ publisher: Xueqiao Xu
-│  ├─ email: xueqiaoxu@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/difflib
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/difflib/README.md
-├─ dreamopt@0.8.0
-│  ├─ licenses: UNKNOWN
-│  ├─ repository: https://github.com/andreyvit/dreamopt.js
-│  ├─ publisher: Andrey Tarantsov
-│  ├─ email: andreyvit@me.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/dreamopt
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/dreamopt/README.md
-├─ emoji-regex@8.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mathiasbynens/emoji-regex
-│  ├─ publisher: Mathias Bynens
-│  ├─ url: https://mathiasbynens.be/
-│  ├─ path: ./source/node_modules/emoji-regex
-│  └─ licenseFile: ./source/node_modules/emoji-regex/LICENSE-MIT.txt
-├─ end-of-stream@1.4.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mafintosh/end-of-stream
-│  ├─ publisher: Mathias Buus
-│  ├─ email: mathiasbuus@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/end-of-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/end-of-stream/LICENSE
-├─ es5-ext@0.10.53
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/es5-ext
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/es5-ext
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/es5-ext/LICENSE
-├─ es6-iterator@2.0.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/medikoo/es6-iterator
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/es6-iterator
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/es6-iterator/LICENSE
-├─ es6-symbol@3.1.3
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/es6-symbol
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/es6-symbol
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/es6-symbol/LICENSE
-├─ es6-weak-map@2.0.3
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/es6-weak-map
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/es6-weak-map
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/es6-weak-map/LICENSE
-├─ escalade@3.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lukeed/escalade
-│  ├─ publisher: Luke Edwards
-│  ├─ email: luke.edwards05@gmail.com
-│  ├─ url: https://lukeed.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/escalade
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/escalade/license
-├─ escodegen@1.14.3
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/estools/escodegen
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/escodegen
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/escodegen/LICENSE.BSD
-├─ esprima@4.0.1
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/jquery/esprima
-│  ├─ publisher: Ariya Hidayat
-│  ├─ email: ariya.hidayat@gmail.com
-│  ├─ path: ./source/node_modules/esprima
-│  └─ licenseFile: ./source/node_modules/esprima/LICENSE.BSD
-├─ estraverse@4.3.0
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/estools/estraverse
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/estraverse
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/estraverse/LICENSE.BSD
-├─ esutils@2.0.3
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/estools/esutils
-│  ├─ path: ./source/node_modules/esutils
-│  └─ licenseFile: ./source/node_modules/esutils/LICENSE.BSD
-├─ event-emitter@0.3.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/medikoo/event-emitter
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/event-emitter
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/event-emitter/LICENSE
-├─ events@1.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/Gozala/events
-│  ├─ publisher: Irakli Gozalishvili
-│  ├─ email: rfobic@gmail.com
-│  ├─ url: http://jeditoolkit.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/events
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/events/LICENSE
-├─ exit-on-epipe@1.0.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/SheetJS/node-exit-on-epipe
-│  ├─ publisher: sheetjs
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/exit-on-epipe
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/exit-on-epipe/LICENSE
-├─ ext@1.6.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/es5-ext.git#ext
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ext
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ext/LICENSE
-├─ fast-deep-equal@3.1.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/epoberezkin/fast-deep-equal
-│  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/fast-deep-equal
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/fast-deep-equal/LICENSE
-├─ fast-json-stable-stringify@2.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/epoberezkin/fast-json-stable-stringify
-│  ├─ publisher: James Halliday
-│  ├─ email: mail@substack.net
-│  ├─ url: http://substack.net
-│  ├─ path: ./source/node_modules/fast-json-stable-stringify
-│  └─ licenseFile: ./source/node_modules/fast-json-stable-stringify/LICENSE
-├─ fast-levenshtein@2.0.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/hiddentao/fast-levenshtein
-│  ├─ publisher: Ramesh Nair
-│  ├─ email: ram@hiddentao.com
-│  ├─ url: http://www.hiddentao.com/
-│  ├─ path: ./source/node_modules/fast-levenshtein
-│  └─ licenseFile: ./source/node_modules/fast-levenshtein/LICENSE.md
-├─ file-uri-to-path@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/file-uri-to-path
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/file-uri-to-path
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/file-uri-to-path/LICENSE
-├─ fill-range@7.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jonschlinkert/fill-range
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/fill-range
-│  └─ licenseFile: ./source/node_modules/fill-range/LICENSE
-├─ forensic-cdk-solution@0.1.0
-│  ├─ licenses: Undefined
-│  ├─ path: ./source
-│  └─ licenseFile: ./source/license.output
-├─ fs-constants@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mafintosh/fs-constants
-│  ├─ publisher: Mathias Buus
-│  ├─ url: @mafintosh
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/fs-constants
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/fs-constants/LICENSE
-├─ fs-extra@8.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jprichardson/node-fs-extra
-│  ├─ publisher: JP Richardson
-│  ├─ email: jprichardson@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/get-uri/node_modules/fs-extra
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/get-uri/node_modules/fs-extra/LICENSE
-├─ fs-extra@9.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jprichardson/node-fs-extra
-│  ├─ publisher: JP Richardson
-│  ├─ email: jprichardson@gmail.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/fs-extra
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/fs-extra/LICENSE
-├─ fs.realpath@1.0.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/fs.realpath
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/fs.realpath
-│  └─ licenseFile: ./source/node_modules/fs.realpath/LICENSE
-├─ fs@0.0.1-security
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/security-holder
-│  ├─ path: ./source/node_modules/fs
-│  └─ licenseFile: ./source/node_modules/fs/README.md
-├─ fsevents@2.3.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/fsevents/fsevents
-│  ├─ path: ./source/node_modules/fsevents
-│  └─ licenseFile: ./source/node_modules/fsevents/LICENSE
-├─ ftp@0.3.10
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mscdex/node-ftp
-│  ├─ publisher: Brian White
-│  ├─ email: mscdex@mscdex.net
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ftp
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ftp/LICENSE
-├─ get-caller-file@2.0.5
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/stefanpenner/get-caller-file
-│  ├─ publisher: Stefan Penner
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/get-caller-file
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/get-caller-file/LICENSE.md
-├─ get-uri@3.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-get-uri
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/get-uri
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/get-uri/README.md
-├─ glob-parent@5.1.2
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/gulpjs/glob-parent
-│  ├─ publisher: Gulp Team
-│  ├─ email: team@gulpjs.com
-│  ├─ url: https://gulpjs.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/glob-parent
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/glob-parent/LICENSE
-├─ glob@7.2.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-glob
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/glob
-│  └─ licenseFile: ./source/node_modules/glob/LICENSE
-├─ graceful-fs@4.2.8
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-graceful-fs
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/graceful-fs
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/graceful-fs/LICENSE
-├─ graceful-fs@4.2.9
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-graceful-fs
-│  ├─ path: ./source/node_modules/graceful-fs
-│  └─ licenseFile: ./source/node_modules/graceful-fs/LICENSE
-├─ has-flag@4.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/has-flag
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/has-flag
-│  └─ licenseFile: ./source/node_modules/has-flag/license
-├─ heap@0.2.7
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/qiao/heap.js
-│  ├─ publisher: Xueqiao Xu
-│  ├─ email: xueqiaoxu@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/heap
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/heap/LICENSE
-├─ http-errors@1.8.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jshttp/http-errors
-│  ├─ publisher: Jonathan Ong
-│  ├─ email: me@jongleberry.com
-│  ├─ url: http://jongleberry.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/http-errors
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/http-errors/LICENSE
-├─ http-proxy-agent@4.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-http-proxy-agent
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/http-proxy-agent
-│  └─ licenseFile: ./source/node_modules/http-proxy-agent/README.md
-├─ https-proxy-agent@5.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-https-proxy-agent
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/https-proxy-agent
-│  └─ licenseFile: ./source/node_modules/https-proxy-agent/README.md
-├─ iconv-lite@0.4.24
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/ashtuchkin/iconv-lite
-│  ├─ publisher: Alexander Shtuchkin
-│  ├─ email: ashtuchkin@gmail.com
-│  ├─ path: ./source/node_modules/iconv-lite
-│  └─ licenseFile: ./source/node_modules/iconv-lite/LICENSE
-├─ ieee754@1.1.13
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/feross/ieee754
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: http://feross.org
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/aws-sdk/node_modules/ieee754
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/aws-sdk/node_modules/ieee754/LICENSE
-├─ ieee754@1.2.1
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/feross/ieee754
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: https://feross.org
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ieee754
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ieee754/LICENSE
-├─ ignore@5.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/kaelzhang/node-ignore
-│  ├─ publisher: kael
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/ignore
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/ignore/LICENSE-MIT
-├─ inflight@1.0.6
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/inflight
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/inflight
-│  └─ licenseFile: ./source/node_modules/inflight/LICENSE
-├─ inherits@2.0.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/inherits
-│  ├─ path: ./source/node_modules/inherits
-│  └─ licenseFile: ./source/node_modules/inherits/LICENSE
-├─ ip@1.1.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/indutny/node-ip
-│  ├─ publisher: Fedor Indutny
-│  ├─ email: fedor@indutny.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ip
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ip/README.md
-├─ is-binary-path@2.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/is-binary-path
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/is-binary-path
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/is-binary-path/license
-├─ is-buffer@1.1.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/feross/is-buffer
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: http://feross.org/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/is-buffer
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/is-buffer/LICENSE
-├─ is-extglob@2.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jonschlinkert/is-extglob
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/is-extglob
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/is-extglob/LICENSE
-├─ is-fullwidth-code-point@3.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/is-fullwidth-code-point
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/is-fullwidth-code-point
-│  └─ licenseFile: ./source/node_modules/is-fullwidth-code-point/license
-├─ is-glob@4.0.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/micromatch/is-glob
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/is-glob
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/is-glob/LICENSE
-├─ is-number@7.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jonschlinkert/is-number
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/is-number
-│  └─ licenseFile: ./source/node_modules/is-number/LICENSE
-├─ is-promise@2.2.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/then/is-promise
-│  ├─ publisher: ForbesLindesay
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/is-promise
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/is-promise/LICENSE
-├─ isarray@0.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/juliangruber/isarray
-│  ├─ publisher: Julian Gruber
-│  ├─ email: mail@juliangruber.com
-│  ├─ url: http://juliangruber.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ftp/node_modules/isarray
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ftp/node_modules/isarray/README.md
-├─ isarray@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/juliangruber/isarray
-│  ├─ publisher: Julian Gruber
-│  ├─ email: mail@juliangruber.com
-│  ├─ url: http://juliangruber.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/isarray
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/isarray/README.md
-├─ jest-diff@27.4.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/jest
-│  ├─ path: ./source/node_modules/jest-diff
-│  └─ licenseFile: ./source/node_modules/jest-diff/LICENSE
-├─ jest-get-type@27.4.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/jest
-│  ├─ path: ./source/node_modules/jest-get-type
-│  └─ licenseFile: ./source/node_modules/jest-get-type/LICENSE
-├─ jest-util@27.4.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/jest
-│  ├─ path: ./source/node_modules/jest-util
-│  └─ licenseFile: ./source/node_modules/jest-util/LICENSE
-├─ jmespath@0.16.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/jmespath/jmespath.js
-│  ├─ publisher: James Saryerwinnie
-│  ├─ email: js@jamesls.com
-│  ├─ url: http://jamesls.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/jmespath
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/jmespath/LICENSE
-├─ json-diff@0.7.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/andreyvit/json-diff
-│  ├─ publisher: Andrey Tarantsov
-│  ├─ email: andreyvit@me.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/json-diff
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/json-diff/LICENSE-MIT
-├─ json-schema-traverse@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/epoberezkin/json-schema-traverse
-│  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/json-schema-traverse
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/json-schema-traverse/LICENSE
-├─ json5@2.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/json5/json5
-│  ├─ publisher: Aseem Kishore
-│  ├─ email: aseem.kishore@gmail.com
-│  ├─ path: ./source/node_modules/json5
-│  └─ licenseFile: ./source/node_modules/json5/LICENSE.md
-├─ jsonfile@4.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jprichardson/node-jsonfile
-│  ├─ publisher: JP Richardson
-│  ├─ email: jprichardson@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/get-uri/node_modules/jsonfile
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/get-uri/node_modules/jsonfile/LICENSE
-├─ jsonfile@6.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jprichardson/node-jsonfile
-│  ├─ publisher: JP Richardson
-│  ├─ email: jprichardson@gmail.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/jsonfile
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/jsonfile/LICENSE
-├─ jsonschema@1.4.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/tdegrunt/jsonschema
-│  ├─ publisher: Tom de Grunt
-│  ├─ email: tom@degrunt.nl
-│  ├─ path: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/jsonschema
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/jsonschema/LICENSE
-├─ lazystream@1.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jpommerening/node-lazystream
-│  ├─ publisher: Jonas Pommerening
-│  ├─ email: jonas.pommerening@gmail.com
-│  ├─ url: https://npmjs.org/~jpommerening
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lazystream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lazystream/LICENSE
-├─ levn@0.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/gkz/levn
-│  ├─ publisher: George Zahariev
-│  ├─ email: z@georgezahariev.com
-│  ├─ path: ./source/node_modules/levn
-│  └─ licenseFile: ./source/node_modules/levn/LICENSE
-├─ lodash.defaults@4.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ url: http://allyoucanleet.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lodash.defaults
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lodash.defaults/LICENSE
-├─ lodash.difference@4.5.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ url: http://allyoucanleet.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lodash.difference
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lodash.difference/LICENSE
-├─ lodash.flatten@4.4.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ url: http://allyoucanleet.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lodash.flatten
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lodash.flatten/LICENSE
-├─ lodash.isplainobject@4.0.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ url: http://allyoucanleet.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lodash.isplainobject
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lodash.isplainobject/LICENSE
-├─ lodash.truncate@4.4.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ url: http://allyoucanleet.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lodash.truncate
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lodash.truncate/LICENSE
-├─ lodash.union@4.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ url: http://allyoucanleet.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lodash.union
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lodash.union/LICENSE
-├─ lodash@4.17.21
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lodash/lodash
-│  ├─ publisher: John-David Dalton
-│  ├─ email: john.david.dalton@gmail.com
-│  ├─ path: ./source/node_modules/lodash
-│  └─ licenseFile: ./source/node_modules/lodash/LICENSE
-├─ lru-cache@5.1.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-lru-cache
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/proxy-agent/node_modules/lru-cache
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/proxy-agent/node_modules/lru-cache/LICENSE
-├─ lru-cache@6.0.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-lru-cache
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ path: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/lru-cache
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/lru-cache/LICENSE
-├─ lru-queue@0.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/medikoo/lru-queue
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lru-queue
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lru-queue/LICENCE
-├─ make-error@1.3.6
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/JsCommunity/make-error
-│  ├─ publisher: Julien Fontanet
-│  ├─ email: julien.fontanet@isonoe.net
-│  ├─ path: ./source/node_modules/make-error
-│  └─ licenseFile: ./source/node_modules/make-error/LICENSE
-├─ md5@2.3.0
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/pvorb/node-md5
-│  ├─ publisher: Paul Vorbach
-│  ├─ email: paul@vorba.ch
-│  ├─ url: http://paul.vorba.ch
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/md5
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/md5/LICENSE
-├─ memoizee@0.4.15
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/memoizee
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medikoo@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/memoizee
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/memoizee/LICENSE
-├─ mime@2.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/broofa/mime
-│  ├─ publisher: Robert Kieffer
-│  ├─ email: robert@broofa.com
-│  ├─ url: http://github.com/broofa
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/mime
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/mime/LICENSE
-├─ minimatch@3.0.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/minimatch
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/minimatch
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/minimatch/LICENSE
-├─ minimatch@3.0.5
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/minimatch
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/minimatch
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/minimatch/LICENSE
-├─ minimist@1.2.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/substack/minimist
-│  ├─ publisher: James Halliday
-│  ├─ email: mail@substack.net
-│  ├─ url: http://substack.net
-│  ├─ path: ./source/node_modules/minimist
-│  └─ licenseFile: ./source/node_modules/minimist/LICENSE
-├─ ms@2.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/zeit/ms
-│  ├─ path: ./source/node_modules/ms
-│  └─ licenseFile: ./source/node_modules/ms/license.md
-├─ mute-stream@0.0.8
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/mute-stream
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/mute-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/mute-stream/LICENSE
-├─ netmask@2.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/rs/node-netmask
-│  ├─ publisher: Olivier Poitrey
-│  ├─ email: rs@rhapsodyk.net
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/netmask
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/netmask/README.md
-├─ next-tick@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/medikoo/next-tick
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/next-tick
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/next-tick/LICENSE
-├─ next-tick@1.1.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/next-tick
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/memoizee/node_modules/next-tick
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/memoizee/node_modules/next-tick/LICENSE
-├─ normalize-path@3.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jonschlinkert/normalize-path
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/normalize-path
-│  └─ licenseFile: ./source/node_modules/normalize-path/LICENSE
-├─ once@1.4.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/once
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/once
-│  └─ licenseFile: ./source/node_modules/once/LICENSE
-├─ optionator@0.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/gkz/optionator
-│  ├─ publisher: George Zahariev
-│  ├─ email: z@georgezahariev.com
-│  ├─ path: ./source/node_modules/optionator
-│  └─ licenseFile: ./source/node_modules/optionator/LICENSE
-├─ pac-proxy-agent@5.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-pac-proxy-agent
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/pac-proxy-agent
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/pac-proxy-agent/README.md
-├─ pac-resolver@5.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-pac-resolver
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/pac-resolver
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/pac-resolver/README.md
-├─ path-is-absolute@1.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/path-is-absolute
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/path-is-absolute
-│  └─ licenseFile: ./source/node_modules/path-is-absolute/license
-├─ picomatch@2.3.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/micromatch/picomatch
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/picomatch
-│  └─ licenseFile: ./source/node_modules/picomatch/LICENSE
-├─ prelude-ls@1.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/gkz/prelude-ls
-│  ├─ publisher: George Zahariev
-│  ├─ email: z@georgezahariev.com
-│  ├─ path: ./source/node_modules/prelude-ls
-│  └─ licenseFile: ./source/node_modules/prelude-ls/LICENSE
-├─ pretty-format@27.4.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/jest
-│  ├─ publisher: James Kyle
-│  ├─ email: me@thejameskyle.com
-│  ├─ path: ./source/node_modules/pretty-format
-│  └─ licenseFile: ./source/node_modules/pretty-format/LICENSE
-├─ printj@1.3.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/SheetJS/printj
-│  ├─ publisher: sheetjs
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/printj
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/printj/LICENSE
-├─ process-nextick-args@2.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/calvinmetcalf/process-nextick-args
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/process-nextick-args
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/process-nextick-args/license.md
-├─ promptly@3.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/moxystudio/node-promptly
-│  ├─ publisher: André Cruz
-│  ├─ email: andre@moxy.studio
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/promptly
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/promptly/LICENSE
-├─ proxy-agent@5.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-proxy-agent
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/proxy-agent
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/proxy-agent/README.md
-├─ proxy-from-env@1.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/Rob--W/proxy-from-env
-│  ├─ publisher: Rob Wu
-│  ├─ email: rob@robwu.nl
-│  ├─ url: https://robwu.nl/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/proxy-from-env
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/proxy-from-env/LICENSE
-├─ punycode@1.3.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/bestiejs/punycode.js
-│  ├─ publisher: Mathias Bynens
-│  ├─ url: https://mathiasbynens.be/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/url/node_modules/punycode
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/url/node_modules/punycode/LICENSE-MIT.txt
-├─ punycode@2.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/bestiejs/punycode.js
-│  ├─ publisher: Mathias Bynens
-│  ├─ url: https://mathiasbynens.be/
-│  ├─ path: ./source/node_modules/punycode
-│  └─ licenseFile: ./source/node_modules/punycode/LICENSE-MIT.txt
-├─ querystring@0.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/Gozala/querystring
-│  ├─ publisher: Irakli Gozalishvili
-│  ├─ email: rfobic@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/querystring
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/querystring/License.md
-├─ raw-body@2.4.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/stream-utils/raw-body
-│  ├─ publisher: Jonathan Ong
-│  ├─ email: me@jongleberry.com
-│  ├─ url: http://jongleberry.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/raw-body
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/raw-body/LICENSE
-├─ react-is@17.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/facebook/react
-│  ├─ path: ./source/node_modules/react-is
-│  └─ licenseFile: ./source/node_modules/react-is/LICENSE
-├─ read@1.0.7
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/read
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/read
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/read/LICENSE
-├─ readable-stream@1.1.14
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/isaacs/readable-stream
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ftp/node_modules/readable-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ftp/node_modules/readable-stream/LICENSE
-├─ readable-stream@2.3.7
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/nodejs/readable-stream
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/lazystream/node_modules/readable-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/lazystream/node_modules/readable-stream/LICENSE
-├─ readable-stream@3.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/nodejs/readable-stream
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/readable-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/readable-stream/LICENSE
-├─ readdir-glob@1.1.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/Yqnn/node-readdir-glob
-│  ├─ publisher: Yann Armelin
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/readdir-glob
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/readdir-glob/LICENSE
-├─ readdirp@3.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/paulmillr/readdirp
-│  ├─ publisher: Thorsten Lorenz
-│  ├─ email: thlorenz@gmx.de
-│  ├─ url: thlorenz.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/readdirp
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/readdirp/LICENSE
-├─ require-directory@2.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/troygoode/node-require-directory
-│  ├─ publisher: Troy Goode
-│  ├─ email: troygoode@gmail.com
-│  ├─ url: http://github.com/troygoode/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/require-directory
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/require-directory/LICENSE
-├─ require-from-string@2.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/floatdrop/require-from-string
-│  ├─ publisher: Vsevolod Strukchinsky
-│  ├─ email: floatdrop@gmail.com
-│  ├─ url: github.com/floatdrop
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/require-from-string
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/require-from-string/license
-├─ rimraf@3.0.2
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/rimraf
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/rimraf
-│  └─ licenseFile: ./source/node_modules/rimraf/LICENSE
-├─ safe-buffer@5.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/feross/safe-buffer
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: http://feross.org
-│  ├─ path: ./source/node_modules/safe-buffer
-│  └─ licenseFile: ./source/node_modules/safe-buffer/LICENSE
-├─ safe-buffer@5.2.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/feross/safe-buffer
-│  ├─ publisher: Feross Aboukhadijeh
-│  ├─ email: feross@feross.org
-│  ├─ url: https://feross.org
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/readable-stream/node_modules/safe-buffer
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/readable-stream/node_modules/safe-buffer/LICENSE
-├─ safer-buffer@2.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/ChALkeR/safer-buffer
-│  ├─ publisher: Nikita Skovoroda
-│  ├─ email: chalkerx@gmail.com
-│  ├─ url: https://github.com/ChALkeR
-│  ├─ path: ./source/node_modules/safer-buffer
-│  └─ licenseFile: ./source/node_modules/safer-buffer/LICENSE
-├─ sax@1.2.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/sax-js
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/sax
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/sax/LICENSE
-├─ sax@1.2.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/sax-js
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/xml2js/node_modules/sax
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/xml2js/node_modules/sax/LICENSE
-├─ semver@7.3.5
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/node-semver
-│  ├─ path: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/semver
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/semver/LICENSE
-├─ setprototypeof@1.2.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/wesleytodd/setprototypeof
-│  ├─ publisher: Wes Todd
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/setprototypeof
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/setprototypeof/LICENSE
-├─ slice-ansi@4.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/slice-ansi
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/slice-ansi
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/slice-ansi/license
-├─ smart-buffer@4.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/JoshGlazebrook/smart-buffer
-│  ├─ publisher: Josh Glazebrook
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/smart-buffer
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/smart-buffer/LICENSE
-├─ socks-proxy-agent@5.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-socks-proxy-agent
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/socks-proxy-agent
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/socks-proxy-agent/README.md
-├─ socks@2.6.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/JoshGlazebrook/socks
-│  ├─ publisher: Josh Glazebrook
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/socks
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/socks/LICENSE
-├─ source-map-support@0.5.16
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/evanw/node-source-map-support
-│  ├─ path: ./source/node_modules/source-map-support
-│  └─ licenseFile: ./source/node_modules/source-map-support/LICENSE.md
-├─ source-map-support@0.5.21
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/evanw/node-source-map-support
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/source-map-support
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/source-map-support/LICENSE.md
-├─ source-map@0.6.1
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/mozilla/source-map
-│  ├─ publisher: Nick Fitzgerald
-│  ├─ email: nfitzgerald@mozilla.com
-│  ├─ path: ./source/node_modules/source-map
-│  └─ licenseFile: ./source/node_modules/source-map/LICENSE
-├─ statuses@1.5.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jshttp/statuses
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/statuses
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/statuses/LICENSE
-├─ string-width@4.2.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/string-width
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/string-width
-│  └─ licenseFile: ./source/node_modules/string-width/license
-├─ string_decoder@0.10.31
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/rvagg/string_decoder
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ftp/node_modules/string_decoder
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ftp/node_modules/string_decoder/LICENSE
-├─ string_decoder@1.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/nodejs/string_decoder
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/string_decoder
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/string_decoder/LICENSE
-├─ string_decoder@1.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/nodejs/string_decoder
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/readable-stream/node_modules/string_decoder
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/readable-stream/node_modules/string_decoder/LICENSE
-├─ strip-ansi@6.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/strip-ansi
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/strip-ansi
-│  └─ licenseFile: ./source/node_modules/strip-ansi/license
-├─ supports-color@7.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/supports-color
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/supports-color
-│  └─ licenseFile: ./source/node_modules/supports-color/license
-├─ table@6.8.0
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/gajus/table
-│  ├─ publisher: Gajus Kuizinas
-│  ├─ email: gajus@gajus.com
-│  ├─ url: http://gajus.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/table
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/table/LICENSE
-├─ tar-stream@2.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mafintosh/tar-stream
-│  ├─ publisher: Mathias Buus
-│  ├─ email: mathiasbuus@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/tar-stream
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/tar-stream/LICENSE
-├─ timers-ext@0.1.7
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/timers-ext
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: http://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/timers-ext
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/timers-ext/LICENSE
-├─ to-regex-range@5.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/micromatch/to-regex-range
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/to-regex-range
-│  └─ licenseFile: ./source/node_modules/to-regex-range/LICENSE
-├─ toidentifier@1.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/component/toidentifier
-│  ├─ publisher: Douglas Christopher Wilson
-│  ├─ email: doug@somethingdoug.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/toidentifier
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/toidentifier/LICENSE
-├─ ts-jest@27.0.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/kulshekhar/ts-jest
-│  ├─ publisher: Kulshekhar Kabra
-│  ├─ email: kulshekhar@users.noreply.github.com
-│  ├─ url: https://github.com/kulshekhar
-│  ├─ path: ./source/node_modules/ts-jest
-│  └─ licenseFile: ./source/node_modules/ts-jest/LICENSE.md
-├─ ts-node@10.2.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TypeStrong/ts-node
-│  ├─ publisher: Blake Embrey
-│  ├─ email: hello@blakeembrey.com
-│  ├─ url: http://blakeembrey.me
-│  ├─ path: ./source/node_modules/ts-node
-│  └─ licenseFile: ./source/node_modules/ts-node/LICENSE
-├─ tslib@2.3.1
-│  ├─ licenses: 0BSD
-│  ├─ repository: https://github.com/Microsoft/tslib
-│  ├─ publisher: Microsoft Corp.
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/tslib
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/tslib/LICENSE.txt
-├─ type-check@0.3.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/gkz/type-check
-│  ├─ publisher: George Zahariev
-│  ├─ email: z@georgezahariev.com
-│  ├─ path: ./source/node_modules/type-check
-│  └─ licenseFile: ./source/node_modules/type-check/LICENSE
-├─ type@1.2.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/type
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: https://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/type
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/type/LICENSE
-├─ type@2.6.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/medikoo/type
-│  ├─ publisher: Mariusz Nowak
-│  ├─ email: medyk@medikoo.com
-│  ├─ url: https://www.medikoo.com/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/ext/node_modules/type
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/ext/node_modules/type/LICENSE
-├─ typescript@4.4.3
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/Microsoft/TypeScript
-│  ├─ publisher: Microsoft Corp.
-│  ├─ path: ./source/node_modules/typescript
-│  └─ licenseFile: ./source/node_modules/typescript/LICENSE.txt
-├─ universalify@0.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/RyanZim/universalify
-│  ├─ publisher: Ryan Zimmerman
-│  ├─ email: opensrc@ryanzim.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/get-uri/node_modules/universalify
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/get-uri/node_modules/universalify/LICENSE
-├─ universalify@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/RyanZim/universalify
-│  ├─ publisher: Ryan Zimmerman
-│  ├─ email: opensrc@ryanzim.com
-│  ├─ path: ./source/node_modules/@aws-cdk/core/node_modules/universalify
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/core/node_modules/universalify/LICENSE
-├─ unpipe@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/stream-utils/unpipe
-│  ├─ publisher: Douglas Christopher Wilson
-│  ├─ email: doug@somethingdoug.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/unpipe
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/unpipe/LICENSE
-├─ uri-js@4.4.1
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/garycourt/uri-js
-│  ├─ publisher: Gary Court
-│  ├─ email: gary.court@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/uri-js
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/uri-js/LICENSE
-├─ url@0.10.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/defunctzombie/node-url
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/url
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/url/LICENSE
-├─ util-deprecate@1.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/util-deprecate
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/util-deprecate
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/util-deprecate/LICENSE
-├─ uuid@3.3.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/kelektiv/node-uuid
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/aws-sdk/node_modules/uuid
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/aws-sdk/node_modules/uuid/LICENSE.md
-├─ uuid@8.3.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/uuidjs/uuid
-│  ├─ path: ./source/node_modules/uuid
-│  └─ licenseFile: ./source/node_modules/uuid/LICENSE.md
-├─ vm2@3.9.7
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/patriksimek/vm2
-│  ├─ publisher: Patrik Simek
-│  ├─ url: https://patriksimek.cz
-│  ├─ path: ./source/node_modules/vm2
-│  └─ licenseFile: ./source/node_modules/vm2/LICENSE.md
-├─ word-wrap@1.2.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jonschlinkert/word-wrap
-│  ├─ publisher: Jon Schlinkert
-│  ├─ url: https://github.com/jonschlinkert
-│  ├─ path: ./source/node_modules/word-wrap
-│  └─ licenseFile: ./source/node_modules/word-wrap/LICENSE
-├─ wordwrap@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/substack/node-wordwrap
-│  ├─ publisher: James Halliday
-│  ├─ email: mail@substack.net
-│  ├─ url: http://substack.net
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/wordwrap
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/wordwrap/LICENSE
-├─ wrap-ansi@7.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chalk/wrap-ansi
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: https://sindresorhus.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/wrap-ansi
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/wrap-ansi/license
-├─ wrappy@1.0.2
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/wrappy
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/wrappy
-│  └─ licenseFile: ./source/node_modules/wrappy/LICENSE
-├─ xml2js@0.4.19
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/Leonidas-from-XIV/node-xml2js
-│  ├─ publisher: Marek Kubica
-│  ├─ email: marek@xivilization.net
-│  ├─ url: https://xivilization.net
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/xml2js
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/xml2js/LICENSE
-├─ xmlbuilder@9.0.7
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/oozcitak/xmlbuilder-js
-│  ├─ publisher: Ozgur Ozcitak
-│  ├─ email: oozcitak@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/xmlbuilder
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/xmlbuilder/LICENSE
-├─ xregexp@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/slevithan/XRegExp
-│  ├─ publisher: Steven Levithan
-│  ├─ email: steves_list@hotmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/xregexp
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/xregexp/README.md
-├─ y18n@5.0.8
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/yargs/y18n
-│  ├─ publisher: Ben Coe
-│  ├─ email: bencoe@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/y18n
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/y18n/LICENSE
-├─ yallist@3.1.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/yallist
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/proxy-agent/node_modules/yallist
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/proxy-agent/node_modules/yallist/LICENSE
-├─ yallist@4.0.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/yallist
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/yallist
-│  └─ licenseFile: ./source/node_modules/@aws-cdk/cloud-assembly-schema/node_modules/yallist/LICENSE
-├─ yaml@1.10.2
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/eemeli/yaml
-│  ├─ publisher: Eemeli Aro
-│  ├─ email: eemeli@gmail.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/yaml
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/yaml/LICENSE
-├─ yargs-parser@20.2.9
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/yargs/yargs-parser
-│  ├─ publisher: Ben Coe
-│  ├─ email: ben@npmjs.com
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/yargs-parser
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/yargs-parser/LICENSE.txt
-├─ yargs@16.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/yargs/yargs
-│  ├─ path: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/yargs
-│  └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/cdk-assets/node_modules/yargs/LICENSE
-├─ yn@3.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/yn
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: ./source/node_modules/yn
-│  └─ licenseFile: ./source/node_modules/yn/license
-└─ zip-stream@4.1.0
-   ├─ licenses: MIT
-   ├─ repository: https://github.com/archiverjs/node-zip-stream
-   ├─ publisher: Chris Talkington
-   ├─ url: http://christalkington.com/
-   ├─ path: ./source/node_modules/aws-cdk/node_modules/zip-stream
-   └─ licenseFile: ./source/node_modules/aws-cdk/node_modules/zip-stream/LICENSE
-
-**********************
-Python Libraries
-**********************
-|-------------------------|--------------------|----------------------------------------------------|
-| Name                    | Meta               | Classifier                                         |
-|-------------------------|--------------------|----------------------------------------------------|
-| codeguru-profiler-agent |                    | OSI Approved::Apache Software License              |
-| charset-normalizer      | MIT                | OSI Approved::MIT License                          |
-| requests                | Apache 2.0         | OSI Approved::Apache Software License              |
-| python-dateutil         | Dual License       | OSI Approved::BSD License                          |
-| s3transfer              | Apache License 2.0 | OSI Approved::Apache Software License              |
-| boto3                   | Apache License 2.0 | OSI Approved::Apache Software License              |
-| jsonpickle              |                    | OSI Approved::BSD License                          |
-| botocore                | Apache License 2.0 | OSI Approved::Apache Software License              |
-| urllib3                 | MIT                | OSI Approved::MIT License                          |
-| wrapt                   | BSD                | OSI Approved::BSD License                          |
-| python2-secrets         |                    | OSI Approved::BSD License                          |
-| six                     | MIT                | OSI Approved::MIT License                          |
-| jmespath                | MIT                | OSI Approved::MIT License                          |
-| certifi                 | MPL-2.0            | OSI Approved::Mozilla Public License 2.0 (MPL 2.0) |
-| idna                    | BSD-3-Clause       | OSI Approved::BSD License                          |
-| aws-xray-sdk            | Apache License 2.0 | OSI Approved::Apache Software License              |
-| arnparse                | MIT                |                                                    |
-| future                  | MIT                | OSI Approved::MIT License                          |
+0BSD - https://spdx.org/licenses/0BSD.html
+BSD-2-Clause - https://spdx.org/licenses/BSD-2-Clause.html
+BSD-3-Clause - https://spdx.org/licenses/BSD-3-Clause.html
+BlueOak-1.0.0 - https://spdx.org/licenses/BlueOak-1.0.0.html
+CC-BY-4.0 - https://spdx.org/licenses/CC-BY-4.0.html
+GPL-2.0-or-later - https://spdx.org/licenses/GPL-2.0-or-later.html
+ISC - https://spdx.org/licenses/ISC.html
+LGPL-2.1-or-later - https://spdx.org/licenses/LGPL-2.1-or-later.html
+PSF-2.0 - https://spdx.org/licenses/PSF-2.0.html
+Python-2.0 - https://spdx.org/licenses/Python-2.0.html

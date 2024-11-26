@@ -18,7 +18,7 @@ botocore==1.34.131
     #   aws-xray-sdk
     #   boto3
     #   s3transfer
-certifi==2024.2.2
+certifi>=2024.07.04
     # via requests
 charset-normalizer==2.0.12
     # via requests

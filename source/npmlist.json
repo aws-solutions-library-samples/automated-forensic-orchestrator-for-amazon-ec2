@@ -11,8 +11,8 @@
             "resolved": "https://registry.npmjs.org/@types/jest/-/jest-27.0.2.tgz"
         },
         "@types/node": {
-            "version": "16.11.9",
-            "resolved": "https://registry.npmjs.org/@types/node/-/node-16.11.9.tgz"
+            "version": "20.1.1",
+            "resolved": "https://registry.npmjs.org/@types/node/-/node-20.1.1.tgz"
         },
         "@types/uuid": {
             "version": "8.3.4",
