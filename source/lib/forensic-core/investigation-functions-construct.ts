@@ -468,8 +468,11 @@ export class ForensicsInvestigationConstruct extends Construct {
             };
         } = this.node.tryGetContext(TOOLS_AMI);
 
-    
-        this.createKernelBuildingStepFunction(props, createInstancePolicies, investigationAdditionalPolicies);
+        this.createKernelBuildingStepFunction(
+            props,
+            createInstancePolicies,
+            investigationAdditionalPolicies
+        );
 
         const toolsAMITable = new CfnMapping(this, 'tools-ami-table', {
             mapping: toolsAMI,
@@ -518,14 +521,18 @@ export class ForensicsInvestigationConstruct extends Construct {
         });
     }
 
-    private createKernelBuildingStepFunction(props: ForensicsInvestigationProps, createInstancePolicies: PolicyStatement[], investigationAdditionalPolicies: PolicyStatement[]) {
+    private createKernelBuildingStepFunction(
+        props: ForensicsInvestigationProps,
+        createInstancePolicies: PolicyStatement[],
+        investigationAdditionalPolicies: PolicyStatement[]
+    ) {
         const snsTopic = new Topic(this, 'ForensicToolTopic', {
             masterKey: new Key(this, `CMKKey`, {
                 description: `KMS Key for ForensicToolTopic`,
                 alias: `builder-tool-topic`,
                 enableKeyRotation: true,
                 removalPolicy: RemovalPolicy.DESTROY,
-            })
+            }),
         });
         const forensicKernelLoaderLambda = new PythonLambdaConstruct(
             this,
@@ -540,7 +547,9 @@ export class ForensicsInvestigationConstruct extends Construct {
                     FORENSIC_INSTANCE_PROFILE: props.instanceProfileARN,
                     S3_BUCKET_NAME: props.forensicBucket.bucketName,
                     S3_COPY_ROLE: props.s3CopyRole.roleArn,
-                    APP_ACCOUNT_ROLE: `${APP_ACCOUNT_ASSUME_ROLE_NAME}-${Stack.of(this).region}`,
+                    APP_ACCOUNT_ROLE: `${APP_ACCOUNT_ASSUME_ROLE_NAME}-${
+                        Stack.of(this).region
+                    }`,
                 },
                 initialPolicy: [
                     ...createInstancePolicies,
@@ -583,7 +592,6 @@ export class ForensicsInvestigationConstruct extends Construct {
                 deadLetterQueue: props.forensicDeadLetterQueue,
             }
         );
-
 
         const stopBuildingInstanceFN = new PythonLambdaConstruct(
             this,
@@ -631,31 +639,29 @@ export class ForensicsInvestigationConstruct extends Construct {
             })
         );
 
-        const stopInstance = new LambdaInvoke(
-            this,
-            'Stop instance',
-            {
-                lambdaFunction: stopBuildingInstanceFN.function,
-            }
-        );
+        const stopInstance = new LambdaInvoke(this, 'Stop instance', {
+            lambdaFunction: stopBuildingInstanceFN.function,
+        });
 
         const chain = Chain.start(
             startBuilderInstance.next(
                 waitState.next(
                     checkInstanceBuildingCompletion.next(
-                        isInstanceBuildingCompleted.when(
-                            Condition.booleanEquals(
-                                '$.Payload.body.isInstanceProfileBuildingComplete',
-                                true
-                            ),
-                            stopInstance
-                        ).when(
-                            Condition.booleanEquals(
-                                '$.Payload.body.isInstanceProfileBuildingComplete',
-                                false
-                            ),
-                            waitState
-                        )
+                        isInstanceBuildingCompleted
+                            .when(
+                                Condition.booleanEquals(
+                                    '$.Payload.body.isInstanceProfileBuildingComplete',
+                                    true
+                                ),
+                                stopInstance
+                            )
+                            .when(
+                                Condition.booleanEquals(
+                                    '$.Payload.body.isInstanceProfileBuildingComplete',
+                                    false
+                                ),
+                                waitState
+                            )
                             .otherwise(waitState)
                     )
                 )
