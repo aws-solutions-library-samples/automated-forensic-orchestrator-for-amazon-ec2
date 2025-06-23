@@ -18,7 +18,7 @@ botocore==1.38.41
     #   aws-xray-sdk
     #   boto3
     #   s3transfer
-certifi>=2024.07.04
+certifi==2025.6.15
     # via requests
 charset-normalizer==2.0.12
     # via requests
@@ -62,11 +62,11 @@ python-dateutil==2.8.2
     # via botocore
 pyyaml==6.0.1
     # via bandit
-requests==2.32.3
+requests==2.32.4
     # via -r lambda/requirements.in
 rich==13.7.1
     # via bandit
-s3transfer>=0.13.0,<0.14.0
+s3transfer==0.13.0
     # via boto3
 six==1.16.0
     # via python-dateutil
