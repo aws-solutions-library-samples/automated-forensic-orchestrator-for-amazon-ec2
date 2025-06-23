@@ -197,7 +197,7 @@ def handler(event, context):
                 ],
             }
             logger.info(
-                f"Performing memory acquisition for {platform_name} instance { instance_id }"
+                f"Performing memory acquisition for {platform_name} instance {instance_id}"
             )
             response = ssm_client.send_command(
                 InstanceIds=[instance_id],
