@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 from unittest import mock
@@ -90,6 +102,7 @@ def test_same_accounts_should_not_share_snapshot():
                 "instanceAccount": "123456789012",
                 "snapshotIds": ["snap-0d5adc83c8bc99da1"],
                 "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "instanceRegion": "ap-southeast-2",
             },
         },
         "statusCode": 200,
@@ -127,6 +140,7 @@ def test_share_betwen_accounts_event():
                 "appAccountId": "123456789012",
                 "snapshotIds": ["snap-0d5adc83c8bc99da1"],
                 "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "instanceRegion": "ap-southeast-2",
             },
         },
         "statusCode": 200,

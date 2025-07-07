@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 
@@ -30,10 +42,6 @@ def handler(event, context):
     app_account_region = input_body.get("instanceRegion")
 
     forensic_id = input_body.get("forensicId")
-    snapshot_ids = input_body.get("snapshotIds")
-    snapshot_artifact_map = input_body.get("snapshotArtifactMap")
-    output_body["snapshotIdsShared"] = snapshot_ids
-    output_body["snapshotArtifactMap"] = snapshot_artifact_map
     current_account = context.invoked_function_arn.split(":")[4]
 
     fds = ForensicDataService(
@@ -50,9 +58,7 @@ def handler(event, context):
     )
 
     try:
-
         if app_account_id != current_account:
-
             ec2_client = create_aws_client(
                 "ec2",
                 current_account=current_account,
@@ -60,33 +66,91 @@ def handler(event, context):
                 target_region=app_account_region,
                 app_account_role=app_account_role,
             )
-            for snapshot_id in snapshot_ids:
-                response = _share_snapshot(
-                    ec2_client=ec2_client,
-                    target_account_id=app_account_id,
-                    snapshot_id=snapshot_id,
-                    solution_account=current_account,
-                )
+            if "clusterInfo" in input_body:
+                for instance_id in input_body.get("clusterInfo").get(
+                    "affectedNode"
+                ):
+                    if (
+                        isinstance(input_body[instance_id], dict)
+                        and "snapshotIds" in input_body[instance_id]
+                    ):
+                        instance_data = input_body[instance_id]
+                        snapshot_ids = instance_data.get("snapshotIds")
+                        snapshot_artifact_map = instance_data.get(
+                            "snapshotArtifactMap"
+                        )
+                        input_body[instance_id][
+                            "snapshotIdsShared"
+                        ] = snapshot_ids
+                        input_body[instance_id][
+                            "snapshotArtifactMap"
+                        ] = snapshot_artifact_map
+                        for snapshot_id in snapshot_ids:
+                            response = _share_snapshot(
+                                ec2_client=ec2_client,
+                                target_account_id=app_account_id,
+                                snapshot_id=snapshot_id,
+                                solution_account=current_account,
+                            )
 
-                logger.info(response)
+                            logger.info(response)
 
-                fds.add_forensic_timeline_event(
-                    id=forensic_id,
-                    name="Sharing snapshot",
-                    description="Sharing snapshot to Forensic Account",
-                    phase=ForensicsProcessingPhase.ACQUISITION,
-                    component_id="shareSnapShot",
-                    component_type="Lambda",
-                    event_data={
-                        "forensicId": forensic_id,
-                        "snapshotId": snapshot_id,
-                        "sourceAccount": app_account_id,
-                        "solutionAccount": current_account,
-                    },
-                )
+                            fds.update_forensic_artifact(
+                                id=forensic_id,
+                                artifact_id=snapshot_artifact_map[snapshot_id],
+                                phase=ForensicsProcessingPhase.ACQUISITION,
+                                component_id="shareSnapShot",
+                                component_type="Lambda",
+                            )
 
-        output_body["appAccount"] = app_account_id
-        output_body["isSnapshotShared"] = True
+                            fds.add_forensic_timeline_event(
+                                id=forensic_id,
+                                name="Sharing snapshot",
+                                description="Sharing snapshot to Forensic Account",
+                                phase=ForensicsProcessingPhase.ACQUISITION,
+                                component_id="shareSnapShot",
+                                component_type="Lambda",
+                                event_data={
+                                    "forensicId": forensic_id,
+                                    "snapshotId": snapshot_id,
+                                    "sourceAccount": app_account_id,
+                                    "solutionAccount": current_account,
+                                },
+                            )
+                    output_body[instance_id]["isSnapshotShared"] = True
+            else:
+
+                snapshot_ids = input_body.get("snapshotIds")
+                snapshot_artifact_map = input_body.get("snapshotArtifactMap")
+                output_body["snapshotIdsShared"] = snapshot_ids
+                output_body["snapshotArtifactMap"] = snapshot_artifact_map
+                for snapshot_id in snapshot_ids:
+                    response = _share_snapshot(
+                        ec2_client=ec2_client,
+                        target_account_id=app_account_id,
+                        snapshot_id=snapshot_id,
+                        solution_account=current_account,
+                    )
+
+                    logger.info(response)
+
+                    fds.add_forensic_timeline_event(
+                        id=forensic_id,
+                        name="Sharing snapshot",
+                        description="Sharing snapshot to Forensic Account",
+                        phase=ForensicsProcessingPhase.ACQUISITION,
+                        component_id="shareSnapShot",
+                        component_type="Lambda",
+                        event_data={
+                            "forensicId": forensic_id,
+                            "snapshotId": snapshot_id,
+                            "sourceAccount": app_account_id,
+                            "solutionAccount": current_account,
+                        },
+                    )
+
+            output_body["appAccount"] = app_account_id
+            output_body["isSnapshotShared"] = True
 
     except Exception as e:
         logger.error(e)

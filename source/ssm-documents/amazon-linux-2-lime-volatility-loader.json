@@ -68,10 +68,10 @@
                     "make",
                     "aws s3 cp lime-$kernel_release.ko s3://{{s3bucket}}/tools/LiME/",
                     "cd /tmp/forensic-tools-builder",
-                    "git clone https://github.com/volatilityfoundation/volatility.git",
-                    "zip -r volatility.zip volatility",
-                    "aws s3 cp volatility.zip s3://{{s3bucket}}/tools/volatility/",
-                    "echo s3 copy of volatility complete",
+                    "git clone https://github.com/volatilityfoundation/volatility3.git",
+                    "zip -r volatility3.zip volatility3",
+                    "aws s3 cp volatility3.zip s3://{{s3bucket}}/tools/volatility3/",
+                    "echo s3 copy of volatility3 complete",
                     "ls -ltr",
                     "exit 0;"
                 ]

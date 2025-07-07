@@ -48,6 +48,7 @@ export interface TriageOrchestratorProps {
     forensicsAcquisitionFns: ForensicsAcquisitionConstruct;
     instanceIsolationLambda: IFunction;
     triageInstanceLambda: IFunction;
+    checkAcquisitionLambda: IFunction;
     investigationSM: IStateMachine;
     snsTopic: ITopic;
     snsDataKey: IKey;
@@ -70,8 +71,12 @@ export class TriageOrchestratorConstruct extends Construct {
     constructor(scope: Construct, id: string, props: TriageOrchestratorProps) {
         super(scope, id);
 
-        const getInstanceInfo = new LambdaInvoke(this, 'Get Instance Info Case', {
+        const getResourceInfo = new LambdaInvoke(this, 'Get Resource Info Case', {
             lambdaFunction: props.triageInstanceLambda,
+        });
+
+        const isAcquisitionCandidate = new LambdaInvoke(this, 'Acquisition Candidate check', {
+            lambdaFunction: props.checkAcquisitionLambda,
         });
 
         const isAcquisitionNeeded = new Choice(this, 'Is Acquisition candidate');
@@ -160,14 +165,18 @@ export class TriageOrchestratorConstruct extends Construct {
             subject: `Forensic Triage completed`,
         });
 
-        const chain = Chain.start(getInstanceInfo).next(
-            isAcquisitionNeeded
-                .when(
-                    Condition.booleanEquals('$.Payload.body.isAcquisitionRequired', true),
-                    acquisitionFlow.next(publishMessage)
+        const chain = Chain.start(getResourceInfo).next(
+            isAcquisitionCandidate
+                .next(isAcquisitionNeeded
+                    .when(
+                        Condition.booleanEquals('$.Payload.body.isAcquisitionRequired', true),
+                        acquisitionFlow
+                    )
+                    .otherwise(publishMessage)
                 )
-                .otherwise(publishMessage)
         );
+        
+        
 
         this.triageStepfunction = new StateMachine(this, 'ForensicsTriageStateMachine', {
             definition: chain,

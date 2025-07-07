@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 import os
 
 from aws_xray_sdk.core import xray_recorder
@@ -19,6 +31,49 @@ from ..data.datatypes import (
 from ..data.service import ForensicDataService
 
 logger = get_logger(__name__)
+
+
+def create_instance_snapshot(
+    instance_id,
+    ec2_client,
+    forensic_id,
+    fds,
+    app_account_id,
+    app_account_region,
+):
+    snapshot_details = ec2_client.create_snapshots(
+        Description=f"Isolated Instance - Forensic ID: {forensic_id}",
+        InstanceSpecification={
+            "InstanceId": instance_id,
+            "ExcludeBootVolume": False,
+        },
+    )
+
+    snapshot_ids = []
+    snapshot_artifact_map = {}
+
+    for snapshot in snapshot_details.get("Snapshots"):
+        artifact_id = fds.create_forensic_artifact(
+            id=forensic_id,
+            phase=ForensicsProcessingPhase.ACQUISITION,
+            category=ArtifactCategory.DISK,
+            type=ArtifactType.EC2SNAPSHOT,
+            status=ArtifactStatus.CREATING,
+            component_id="performInstanceSnapshot",
+            component_type="Lambda",
+            source_account_snapshot=Snapshot(
+                snapshot.get("SnapshotId"),
+                snapshot.get("VolumeId"),
+                snapshot.get("VolumeSize"),
+                app_account_id,
+                app_account_region,
+            ),
+        )
+        snapshot_ids.append(snapshot.get("SnapshotId"))
+
+        snapshot_artifact_map[snapshot.get("SnapshotId")] = artifact_id
+
+    return snapshot_ids, snapshot_artifact_map
 
 
 @xray_recorder.capture("Perform Instance SnapShot")
@@ -66,46 +121,53 @@ def handler(event, context):
             record_id=forensic_id, metadata_only=True
         )
 
-        instance_id = forensic_record.resourceId
-        output_body["instanceId"] = instance_id
-        logger.info("Taking snapshot for EBS volumes {0}".format(instance_id))
-
-        snapshot_details = ec2_client.create_snapshots(
-            Description=f"Isolated Instance - Forensic ID: {forensic_id}",
-            InstanceSpecification={
-                "InstanceId": instance_id,
-                "ExcludeBootVolume": False,
-            },
-        )
-
-        snapshot_ids = []
-        snapshot_artifact_map = {}
-
-        for snapshot in snapshot_details.get("Snapshots"):
-            artifact_id = fds.create_forensic_artifact(
-                id=forensic_id,
-                phase=ForensicsProcessingPhase.ACQUISITION,
-                category=ArtifactCategory.DISK,
-                type=ArtifactType.EC2SNAPSHOT,
-                status=ArtifactStatus.CREATING,
-                component_id="performInstanceSnapshot",
-                component_type="Lambda",
-                source_account_snapshot=Snapshot(
-                    snapshot.get("SnapshotId"),
-                    snapshot.get("VolumeId"),
-                    snapshot.get("VolumeSize"),
+        if "clusterInfo" in input_body:
+            instance_id_list = input_body.get("clusterInfo").get(
+                "affectedNode"
+            )
+            output_body["instanceId"] = instance_id_list
+            source_snapshot_ids = []
+            for each_instance_id in instance_id_list:
+                logger.info(
+                    "Taking snapshot for EBS volumes {0}".format(
+                        each_instance_id
+                    )
+                )
+                snapshot_ids, snapshot_artifact_map = create_instance_snapshot(
+                    each_instance_id,
+                    ec2_client,
+                    forensic_id,
+                    fds,
                     app_account_id,
                     app_account_region,
-                ),
+                )
+                output_body[each_instance_id] = {
+                    "isSnapShotComplete": False,
+                    "snapshotIds": snapshot_ids,
+                    "snapshotArtifactMap": snapshot_artifact_map,
+                    "isSnapshotShared": False,
+                }
+                source_snapshot_ids.extend(snapshot_ids)
+                output_body["isSnapshotShared"] = False
+                output_body["snapshotIds"] = source_snapshot_ids
+        else:
+            instance_id = forensic_record.resourceId
+            output_body["instanceId"] = instance_id
+            logger.info(
+                "Taking snapshot for EBS volumes {0}".format(instance_id)
             )
-            snapshot_ids.append(snapshot.get("SnapshotId"))
-
-            snapshot_artifact_map[snapshot.get("SnapshotId")] = artifact_id
-
-        output_body["isSnapShotComplete"] = False
-        output_body["snapshotIds"] = snapshot_ids
-        output_body["snapshotArtifactMap"] = snapshot_artifact_map
-        output_body["isSnapshotShared"] = False
+            snapshot_ids, snapshot_artifact_map = create_instance_snapshot(
+                instance_id,
+                ec2_client,
+                forensic_id,
+                fds,
+                app_account_id,
+                app_account_region,
+            )
+            output_body["isSnapShotComplete"] = False
+            output_body["snapshotIds"] = snapshot_ids
+            output_body["snapshotArtifactMap"] = snapshot_artifact_map
+            output_body["isSnapshotShared"] = False
 
     except Exception as e:
         logger.error(e)

@@ -58,6 +58,7 @@ export interface ForensicsCoreProps {
  */
 export class ForensicsCore extends Construct {
     public triageLambda: IFunction;
+    public checkAcquisitionLambda: IFunction;
     public sendNotificationLambda: IFunction;
     public sendErrorNotificationLambda: IFunction;
     public isolationLambda: IFunction;
@@ -162,6 +163,7 @@ export class ForensicsCore extends Construct {
             assumedBy: new ServicePrincipal('ec2.amazonaws.com'),
             path: '/',
         });
+
         isolationInstanceRole.addManagedPolicy(
             ManagedPolicy.fromAwsManagedPolicyName('AWSDenyAll')
         );
@@ -238,6 +240,19 @@ export class ForensicsCore extends Construct {
                     Stack.of(this).region
                 }`,
             },
+            initialPolicy: [...additionalPolicies],
+            dashboard: props.dashboard,
+            vpc: props.vpc,
+            deadLetterQueue: props.forensicDeadLetterQueue,
+        }).function;
+
+        //-------------------------------------------------------------------------
+        // Lambda - Function to Check the instance Acquisition requirement
+        //-------------------------------------------------------------------------
+        this.checkAcquisitionLambda = new PythonLambdaConstruct(this, 'checkAcquisitionFunction', {
+            handler: 'src.acquisition.checkAcquisition.lambda_handler',
+            applicationName: 'checkAcquisition',
+            functionName: 'Fo-checkAcquisition',
             initialPolicy: [...additionalPolicies],
             dashboard: props.dashboard,
             vpc: props.vpc,

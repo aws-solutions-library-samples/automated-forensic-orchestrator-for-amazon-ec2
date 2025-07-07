@@ -68,8 +68,8 @@ import {
     RETAIN_DATA,
     SECURITYHUB_ACCOUNT,
     SUBNET_GROUP_CONFIG,
-    VOL2_PROFILES_BUCKET,
-    VOLATILITY2_PROFILES_PREFIX,
+    VOL3_SYMBOLS_BUCKET,
+    VOLATILITY3_SYMBOLS_PREFIX,
     VPC_CONFIG_DETAILS,
     VPC_INFO_CONFIG,
 } from './infra-utils/infra-types';
@@ -218,13 +218,13 @@ export class ForensicsSolutionsConstructsStack extends Stack {
             path: '/',
         });
 
-        const vol2ProfilesBucket =
-            this.node.tryGetContext(VOL2_PROFILES_BUCKET) ||
+        const vol3ProfilesBucket =
+            this.node.tryGetContext(VOL3_SYMBOLS_BUCKET) ||
             `${this.forensicBucket.bucketName}`;
 
-        const vol2ProfilesPrefix =
-            this.node.tryGetContext(VOLATILITY2_PROFILES_PREFIX) ||
-            'volatility2/profiles';
+        const vol3SymbolsPrefix =
+            this.node.tryGetContext(VOLATILITY3_SYMBOLS_PREFIX) ||
+            'volatility3/symbols';
 
         const forensicSSMDBuilder = new ForensicSSMDBuilderConstruct(
             this,
@@ -450,8 +450,8 @@ export class ForensicsSolutionsConstructsStack extends Stack {
                     ...{ S3_BUCKET_KEY_ARN: this.forensicBucketKey.keyArn },
                     INSTANCE_TABLE_NAME:
                         forensicDataSource.forensicInstanceTable.tableName,
-                    VOLATILITY2_PROFILES_BUCKET: vol2ProfilesBucket,
-                    VOLATILITY2_PROFILES_PREFIX: vol2ProfilesPrefix,
+                    VOLATILITY2_PROFILES_BUCKET: vol3ProfilesBucket,
+                    VOLATILITY2_PROFILES_PREFIX: vol3SymbolsPrefix,
                     DISK_SIZE: diskSize,
                 },
                 forensicBucket: this.forensicBucket,
@@ -586,6 +586,7 @@ export class ForensicsSolutionsConstructsStack extends Stack {
                 forensicsAcquisitionFns: forensicsAcquisitionFns,
                 investigationSM: investigationStepConstruct.getStateMachine(),
                 triageInstanceLambda: forensicsCoreFunctions.triageLambda,
+                checkAcquisitionLambda: forensicsCoreFunctions.checkAcquisitionLambda,
                 snsTopic: forensicDataSource.notificationTopic,
                 snsDataKey: this.kmsKeys.forensicsnsEncryptionKey.key,
                 triageLogGroup: this.forensicLogGroup,
@@ -719,6 +720,7 @@ export class ForensicsSolutionsConstructsStack extends Stack {
             value: this.vpc.vpcId,
         });
         vpcIDOutPut.node.addDependency(this.vpc);
+
     }
 
     private createAPI(

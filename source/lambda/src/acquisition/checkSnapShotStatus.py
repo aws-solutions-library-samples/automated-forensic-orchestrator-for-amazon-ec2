@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 
@@ -55,28 +67,61 @@ def handler(event, context):
     )
 
     try:
-        snapshot_ids = input_body.get("snapshotIds")
-        snapshot_artifact_map = input_body.get("snapshotArtifactMap")
+        if "clusterInfo" in input_body:
+            all_complete = True
+            for instance_id in input_body:
+                if (
+                    isinstance(input_body[instance_id], dict)
+                    and "snapshotIds" in input_body[instance_id]
+                ):
+                    instance_data = input_body[instance_id]
+                    snapshot_ids = instance_data.get("snapshotIds")
+                    snapshot_artifact_map = instance_data.get(
+                        "snapshotArtifactMap"
+                    )
 
-        snapshots = ec2_client.describe_snapshots(SnapshotIds=snapshot_ids)
+                    snapshots = ec2_client.describe_snapshots(
+                        SnapshotIds=snapshot_ids
+                    )
+                    snapshots_complete = all_snapshots_completed(snapshots)
+                    instance_data["isSnapShotComplete"] = snapshots_complete
+                    all_complete = all_complete and snapshots_complete
 
-        snapshots_complete = all_snapshots_completed(snapshots)
-        output_body["isSnapShotComplete"] = snapshots_complete
-        output_body["snapshotIds"] = snapshot_ids
-        output_body["snapshotArtifactMap"] = snapshot_artifact_map
+                    for snapshot in snapshots.get("Snapshots"):
+                        if snapshot.get("State") == "completed":
+                            fds.update_forensic_artifact(
+                                id=forensic_id,
+                                artifact_id=snapshot_artifact_map[
+                                    snapshot.get("SnapshotId")
+                                ],
+                                status=ArtifactStatus.SUCCESS,
+                                phase=ForensicsProcessingPhase.ACQUISITION,
+                                component_id="checkSnapShotStatus",
+                                component_type="Lambda",
+                            )
+            output_body["isSnapShotComplete"] = all_complete
+        else:
+            snapshot_ids = input_body.get("snapshotIds")
+            snapshot_artifact_map = input_body.get("snapshotArtifactMap")
 
-        for snapshot in snapshots.get("Snapshots"):
-            if snapshot.get("State") == "completed":
-                fds.update_forensic_artifact(
-                    id=forensic_id,
-                    artifact_id=snapshot_artifact_map[
-                        snapshot.get("SnapshotId")
-                    ],
-                    status=ArtifactStatus.SUCCESS,
-                    phase=ForensicsProcessingPhase.ACQUISITION,
-                    component_id="checkSnapShotStatus",
-                    component_type="Lambda",
-                )
+            snapshots = ec2_client.describe_snapshots(SnapshotIds=snapshot_ids)
+            snapshots_complete = all_snapshots_completed(snapshots)
+            output_body["isSnapShotComplete"] = snapshots_complete
+            output_body["snapshotIds"] = snapshot_ids
+            output_body["snapshotArtifactMap"] = snapshot_artifact_map
+
+            for snapshot in snapshots.get("Snapshots"):
+                if snapshot.get("State") == "completed":
+                    fds.update_forensic_artifact(
+                        id=forensic_id,
+                        artifact_id=snapshot_artifact_map[
+                            snapshot.get("SnapshotId")
+                        ],
+                        status=ArtifactStatus.SUCCESS,
+                        phase=ForensicsProcessingPhase.ACQUISITION,
+                        component_id="checkSnapShotStatus",
+                        component_type="Lambda",
+                    )
 
         return create_response(200, output_body)
 

@@ -20,7 +20,7 @@ export const environmentValues = {
 
 export const SSM_DIRECTORY = 'ssmDocumentsDir';
 
-export const VOL2_PROFILES_BUCKET = 'vol2ProfilesBucket';
+export const VOL3_SYMBOLS_BUCKET = 'vol3SymbolsBucket';
 
 export const DISK_SIZE = '512';
 
@@ -52,7 +52,7 @@ export const RETAIN_DATA = 'retainData';
 
 export const APP_ACCOUNT_FORENSIC_KMS_KEY_ALIAS = 'appForensicAliasKMS';
 
-export const VOLATILITY2_PROFILES_PREFIX = 'vol2-profiles-key';
+export const VOLATILITY3_SYMBOLS_PREFIX = 'vol3-symbols-key';
 
 export const SSM_EXECUTION_TIMEOUT_CONTEXT_VALUE = 'ssmExecutionTimeout';
 

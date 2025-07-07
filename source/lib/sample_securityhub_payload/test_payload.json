@@ -1,0 +1,114 @@
+{
+    "version": "0",
+    "id": "aa998ee8-921b-4cca-579a-ccc83010dd34",
+    "detail-type": "Security Hub Findings - Custom Action",
+    "source": "aws.securityhub",
+    "account": "0123456789101",
+    "time": "2024-07-24T22:55:24Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:securityhub:us-east-1:0123456789101:action/custom/ForensicTriageAction"
+    ],
+    "detail": {
+      "actionName": "Forensic Triage",
+      "actionDescription": "Trigger Forensic Triage Action",
+      "findings": [
+        {
+          "ProductArn": "arn:aws:securityhub:us-east-1::product/aws/guardduty",
+          "Types": [
+            "TTPs/Discovery/Discovery:Kubernetes-MaliciousIPCaller"
+          ],
+          "SourceUrl": "https://us-east-1.console.aws.amazon.com/guardduty/home?region=us-east-1#/findings?macros=current&fId=1234",
+          "Description": "A Kubernetes API commonly used in Discovery tactics was invoked on cluster cleanroom-test-eks from known malicious IP address 167.94.146.63.",
+          "ProductName": "GuardDuty",
+          "FirstObservedAt": "2024-06-05T18:15:39.225Z",
+          "CreatedAt": "2024-06-05T18:16:09.718Z",
+          "LastObservedAt": "2024-06-05T18:15:39.242Z",
+          "CompanyName": "Amazon",
+          "FindingProviderFields": {
+            "Types": [
+              "TTPs/Discovery/Discovery:Kubernetes-MaliciousIPCaller"
+            ],
+            "Severity": {
+              "Normalized": 50,
+              "Label": "MEDIUM",
+              "Product": 5
+            }
+          },
+          "ProductFields": {
+            "aws/guardduty/service/additionalInfo/threatListName": "ProofPoint",
+            "aws/guardduty/service/archived": "false",
+            "aws/guardduty/service/evidence/threatIntelligenceDetails.0_/threatNames": "[]",
+            "aws/guardduty/service/additionalInfo/value": "{\"threatListName\":\"ProofPoint\"}",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/country/countryName": "United States",
+            "aws/guardduty/service/action/kubernetesApiCallAction/verb": "get",
+            "aws/guardduty/service/action/kubernetesApiCallAction/sourceIPs.0_": "167.94.146.63",
+            "aws/guardduty/service/serviceName": "guardduty",
+            "aws/guardduty/service/detectorId": "abcd",
+            "aws/guardduty/service/action/kubernetesApiCallAction/requestUri": "/version",
+            "aws/guardduty/service/eventFirstSeen": "2024-06-05T18:15:39.225Z",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/city/cityName": "",
+            "aws/guardduty/service/eventLastSeen": "2024-06-05T18:15:39.242Z",
+            "aws/guardduty/service/evidence/threatIntelligenceDetails.0_/threatListName": "ProofPoint",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/organization/isp": "Censys-arin-02",
+            "aws/guardduty/service/action/kubernetesApiCallAction/userAgent": "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)",
+            "aws/guardduty/service/action/actionType": "KUBERNETES_API_CALL",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/organization/asn": "398705",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/ipAddressV4": "167.94.146.63",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/geoLocation/lat": "37.751",
+            "aws/guardduty/service/resourceRole": "TARGET",
+            "aws/guardduty/service/action/kubernetesApiCallAction/statusCode": "200",
+            "aws/guardduty/service/count": "1",
+            "aws/guardduty/service/additionalInfo/type": "default",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/geoLocation/lon": "-97.822",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/organization/org": "Censys-arin-02",
+            "aws/guardduty/service/action/kubernetesApiCallAction/remoteIpDetails/organization/asnOrg": "CENSYS-ARIN-02",
+            "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-1::product/aws/guardduty/arn:aws:guardduty:us-east-1:0123456789101:detector/abcd/finding/1234",
+            "aws/securityhub/ProductName": "GuardDuty",
+            "aws/securityhub/CompanyName": "Amazon"
+          },
+          "SchemaVersion": "2018-10-08",
+          "GeneratorId": "arn:aws:guardduty:us-east-1:0123456789101:detector/abcd",
+          "Sample": false,
+          "RecordState": "ACTIVE",
+          "Title": "A Kubernetes API commonly used in Discovery tactics invoked from a known malicious IP address.",
+          "Workflow": {
+            "Status": "NEW"
+          },
+          "Severity": {
+            "Normalized": 50,
+            "Label": "MEDIUM",
+            "Product": 5
+          },
+          "UpdatedAt": "2024-06-05T18:16:09.718Z",
+          "WorkflowState": "NEW",
+          "AwsAccountId": "0123456789101",
+          "Region": "us-east-1",
+          "Id": "arn:aws:guardduty:us-east-1:0123456789101:detector/abcd/finding/1234",
+          "Resources": [
+            {
+              "Partition": "aws",
+              "Type": "AwsEksCluster",
+              "Details": {
+                "Other": {
+                  "kubernetesDetails/kubernetesUserDetails/groups.0_": "system:unauthenticated",
+                  "kubernetesDetails/kubernetesUserDetails/sessionName": "[]",
+                  "kubernetesDetails/kubernetesUserDetails/username": "system:anonymous",
+                  "kubernetesDetails/kubernetesUserDetails/uid": "",
+                  "kubernetesDetails/kubernetesWorkloadDetails": ""
+                },
+                "AwsEksCluster": {
+                  "Arn": "arn:aws:eks:us-east-1:0123456789101:cluster/cleanroom-test-eks",
+                  "ClusterStatus": "ACTIVE",
+                  "Name": "cleanroom-test-eks"
+                }
+              },
+              "Region": "us-east-1",
+              "Id": "arn:aws:eks:us-east-1:0123456789101:cluster/cleanroom-test-eks"
+            }
+          ],
+          "ProcessedAt": "2024-06-05T18:20:05.237Z"
+        }
+      ]
+    }
+  }

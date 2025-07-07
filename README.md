@@ -1,14 +1,14 @@
-# Automated Forensics Orchestrator for Amazon EC2
+# Automated Forensics Orchestrator for Amazon EC2 and EKS
 
-AWS EC2 Forensics Orchestrator is a self-service Guidance implementation that enterprise customers can deploy to quickly set up and configure an automated orchestration workflow. The workflow enables the Security Operations Centre (SOC) to capture and examine data from EC2 instances and attached volumes as evidence for forensic analysis, in the event of a potential security breach.
+AWS EC2 and EKS Forensics Orchestrator is a self-service Guidance implementation that enterprise customers can deploy to quickly set up and configure an automated orchestration workflow. The workflow enables the Security Operations Centre (SOC) to capture and examine data from EC2 instances or EKS Clusters, and attached volumes as evidence for forensic analysis, in the event of a potential security breach. Currently, the Guidance only supports EKS Clusters hosted on EC2 instances. Learn more about the differences for responding to EC2 and EKS security events [here](https://aws.amazon.com/blogs/security/how-to-automate-incident-response-for-amazon-eks-on-amazon-ec2/)
 
-The Guidance orchestrates the forensics process from the point at which a threat is first detected, enable isolation of the affected EC2 instances and data volumes, capture memory and disk images to secure storage, and trigger automated actions or tools for investigation and analysis of such artefacts. The Guidance notifies and reports on its progress, status, and findings, which enables SOCs to continuously discover and analyze patterns of fraudulent activities across multi-account and multi-region environments. The Guidance leverages native AWS services and is underpinned by a highly available, resilient, and serverless architecture, security, and operational monitoring features.
+The Guidance orchestrates the forensics process from the point at which a threat is first detected, enable isolation of the affected EC2 instances, EKS clusters, data volumes, capture memory and disk images to secure storage, and trigger automated actions or tools for investigation and analysis of such artefacts. The Guidance notifies and reports on its progress, status, and findings, which enables SOCs to continuously discover and analyze patterns of fraudulent activities across multi-account and multi-region environments. The Guidance leverages native AWS services and is underpinned by a highly available, resilient, and serverless architecture, security, and operational monitoring features.
 
 Digital forensics is a four step process of triaging, acquisition, analysis and reporting. The automated Forensics framework provides enterprises the capability to act on a security event by imaging or acquisition of breached resource for examination and generates a forensic report about the security breach. In the event of a security breach, it enable customers to easily to capture and examine required targeted data for forsensic’s storage and analysis.
 
 A full walkthrough for the Guidance can be found [here](https://docs.aws.amazon.com/solutions/latest/automated-forensics-orchestrator-for-amazon-ec2/welcome.html)
 
-### EC2 Forensic Orchestrator Guidance Architecture
+### EC2 & EKS Forensic Orchestrator Guidance Architecture
 
 ![Forensic Orchestrator Architecture](source/architecture/architecture.png)
 
@@ -52,7 +52,7 @@ _Tools_
 -   nodejs version 20
     -   https://docs.npmjs.com/getting-started
 -   Ensure GraphQL – AppSync is activated in the Forensic AWS account
--   AWS Systems Manager (SSM) [agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html) installed on EC2
+-   AWS Systems Manager (SSM) [agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html) installed on EC2 or EKS cluster
 -   Enable SecurityHub to allow creation of a custom action in securityHub
     _Note:_ We are working on a blog detailing how to use SSM Distributor to deploy agents across a multi account environment.
 -   Supported EC2 instance AMIs
