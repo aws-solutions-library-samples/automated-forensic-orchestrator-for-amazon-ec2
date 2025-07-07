@@ -26,15 +26,19 @@ def setupevent(request):
         "Payload": {
             "body": {
                 "forensicType": "MEMORY",
-                "ForensicInstanceId": "i-04a5fde997d49e225",
-                "MemoryAcquisition": {
-                    "CommandId": "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec",
-                    "CommandIdArtifactMap": {
-                        "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec": {
-                            "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
-                            "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-0trqhNLt4XuA",
+                "ForensicInstanceIds": ["i-04a5fde997d49e225"],
+                "InstanceResults": {
+                    "i-04a5fde997d49e225": {
+                        "MemoryAcquisition": {
+                            "CommandId": "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec",
+                            "CommandIdArtifactMap": {
+                                "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec": {
+                                    "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
+                                    "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-0trqhNLt4XuA",
+                                }
+                            },
                         }
-                    },
+                    }
                 },
                 "instanceInfo": {
                     "PlatformDetails": "Linux/UNIX",

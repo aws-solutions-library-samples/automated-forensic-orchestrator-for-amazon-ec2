@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 from unittest import mock
@@ -9,6 +21,11 @@ from unittest.mock import MagicMock, Mock, patch
 import boto3
 import pytest
 
+os.environ["AWS_REGION"] = "us-east-1"
+os.environ["WINDOWS_LIME_MEMORY_LOAD_INVESTIGATION"] = (
+    "windows_ssm_document_test"
+)
+os.environ["S3_BUCKET_NAME"] = "test-forensics-bucket"
 
 from ...src.common.awsapi_cached_client import AWSCachedClient
 from ...src.investigation.runMemoryAnalysis import (
@@ -34,7 +51,7 @@ def setupevent(request):
                     "PlatformType": "Linux",
                     "PlatformVersion": "8.5",
                 },
-                "ForensicInstanceId": "i-0bf2bf6b175654c6e",
+                "ForensicInstanceIds": ["i-0bf2bf6b175654c6e"],
                 "ForensicInvestigationInstanceId": "i-0b3daeccbc7e52246",
                 "MemoryForensics": {
                     "CommandId": "26608e13-4c7a-4353-ad97-67e2e6cc66e4"
@@ -43,15 +60,19 @@ def setupevent(request):
                 "SSM_STATUS": "SUCCEEDED",
                 "forensicId": "b6167d32-c3e6-4efc-b2ea-bc0f61b2f682",
                 "isMemoryAcquisitionComplete": "TRUE",
-                "MemoryAcquisition": {
-                    "CommandId": "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec",
-                    "CommandIdArtifactMap": {
-                        "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec": {
-                            "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
-                            "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-0trqhNLt4XuA",
-                        }
-                    },
-                    "CommandInputArtifactId": "e53fbc38-f455-4954-a157-bbf6dc53288f",
+                "InstanceResults": {
+                    "i-0bf2bf6b175654c6e": {
+                        "MemoryAcquisition": {
+                            "CommandId": "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec",
+                            "CommandIdArtifactMap": {
+                                "c2ddbb3d-5d18-45d4-807e-07e936b6f0ec": {
+                                    "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
+                                    "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-0trqhNLt4XuA",
+                                }
+                            },
+                            "CommandInputArtifactId": "e53fbc38-f455-4954-a157-bbf6dc53288f",
+                        },
+                    }
                 },
             }
         },

@@ -231,6 +231,11 @@ Resources:
                           - ec2:DisassociateAddress
                           - iam:GetInstanceProfile
                           - iam:PutRolePolicy
+                          - eks:CreateAccessEntry
+                          - eks:DescribeCluster
+                          - eks:UpdateClusterConfig
+                          - eks:AssociateAccessPolicy
+                          - eks:ListAccessEntries
                       Effect: Allow
                       Resource: '*'
                 Version: '2012-10-17'

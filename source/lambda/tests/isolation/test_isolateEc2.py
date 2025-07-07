@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 from unittest import mock
@@ -334,16 +346,20 @@ def mock_connection(ec_response, get_item_fn=get_item_event):
 event = {
     "Payload": {
         "body": {
-            "ForensicInstanceId": "i-0edaf8fbe9d9fe5db",
-            "MemoryAcquisition": {
-                "CommandId": "f39ff7b5-7cb2-4c4f-8864-2534f5785fa3",
-                "CommandIdArtifactMap": {
-                    "f39ff7b5-7cb2-4c4f-8864-2534f5785fa3": {
-                        "Prefix": "memory/i-0edaf8fbe9d9fe5db/34d1bbcc-f1cd-4a7b-96f7-55a5dc632fd7",
-                        "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-rDFxf6FA5xK2",
-                    }
-                },
-                "CommandInputArtifactId": "4d520810-918d-4401-80c6-1a26d8538e8a",
+            "ForensicInstanceIds": ["i-0edaf8fbe9d9fe5db"],
+            "InstanceResults": {
+                "i-0edaf8fbe9d9fe5db": {
+                    "MemoryAcquisition": {
+                        "CommandId": "f39ff7b5-7cb2-4c4f-8864-2534f5785fa3",
+                        "CommandIdArtifactMap": {
+                            "f39ff7b5-7cb2-4c4f-8864-2534f5785fa3": {
+                                "Prefix": "memory/i-0edaf8fbe9d9fe5db/34d1bbcc-f1cd-4a7b-96f7-55a5dc632fd7",
+                                "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-rDFxf6FA5xK2",
+                            }
+                        },
+                        "CommandInputArtifactId": "4d520810-918d-4401-80c6-1a26d8538e8a",
+                    },
+                }
             },
             "SSM_STATUS": "SUCCEEDED",
             "forensicId": "34d1bbcc-f1cd-4a7b-96f7-55a5dc632fd7",
@@ -495,7 +511,7 @@ event_multiple_eni = {
     "ExecutedVersion": "$LATEST",
     "Payload": {
         "body": {
-            "ForensicInstanceId": "i-056eed1d049318beb",
+            "ForensicInstanceIds": ["i-056eed1d049318beb"],
             "forensicId": "8b242e75-b64a-42f3-9ac4-1b322cd3f974",
             "instanceAccount": "123456789012",
             "instanceInfo": {

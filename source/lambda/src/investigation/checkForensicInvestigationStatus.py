@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 
@@ -219,10 +231,48 @@ def memory_investigation(
     forensic_id,
     output_body,
 ):
-    command_id = input_body["MemoryInvestigation"]["CommandId"]
-    command_id_artifact_map = input_body["MemoryInvestigation"][
-        "CommandIdArtifactMap"
-    ]
+    if "clusterInfo" in input_body:
+        for each_instance_id in input_body["ForensicInstanceIds"]:
+            check_memory_investigation_status(
+                ssmclient,
+                s3_bucket_name,
+                s3_client,
+                fds,
+                input_body,
+                forensic_id,
+                output_body,
+                each_instance_id,
+            )
+    else:
+        instance_id = input_body["ForensicInstanceIds"][0]
+        check_memory_investigation_status(
+            ssmclient,
+            s3_bucket_name,
+            s3_client,
+            fds,
+            input_body,
+            forensic_id,
+            output_body,
+            instance_id,
+        )
+
+
+def check_memory_investigation_status(
+    ssmclient,
+    s3_bucket_name,
+    s3_client,
+    fds,
+    input_body,
+    forensic_id,
+    output_body,
+    instance_id,
+):
+    command_id = input_body["InstanceResults"][instance_id][
+        "MemoryInvestigation"
+    ]["CommandId"]
+    command_id_artifact_map = input_body["InstanceResults"][instance_id][
+        "MemoryInvestigation"
+    ]["CommandIdArtifactMap"]
     prefix = command_id_artifact_map[command_id]["Prefix"]
     ssm_document_name = command_id_artifact_map[command_id]["SSMDocumentName"]
     input_artifact_id = command_id_artifact_map[command_id][

@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 
@@ -41,6 +53,7 @@ def create_aws_client(
             role=app_account_role,
             target_region=target_region,
         )
+
         return ec2_assumerole_session.client(client_name)
 
 
@@ -132,9 +145,7 @@ class BotoSession:
         self.STS = boto3.client(
             "sts",
             config=self.boto_config,
-            endpoint_url="https://sts."
-            + self.target_region
-            + ".amazonaws.com",
+            endpoint_url="https://sts.us-east-1.amazonaws.com",
         )
         if not self.target:
             self.target = self.STS.get_caller_identity()["Account"]
@@ -153,6 +164,7 @@ class BotoSession:
                 "SecretAccessKey"
             ],
             aws_session_token=remote_account["Credentials"]["SessionToken"],
+            region_name=self.target_region,
         )
 
         boto3.setup_default_session()

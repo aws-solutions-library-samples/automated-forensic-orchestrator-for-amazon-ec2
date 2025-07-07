@@ -1,6 +1,18 @@
 #!/usr/bin/python
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: Apache-2.0
+###############################################################################
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.    #
+#                                                                             #
+#  Licensed under the Apache License Version 2.0 (the "License"). You may not #
+#  use this file except in compliance with the License. A copy of the License #
+#  is located at                                                              #
+#                                                                             #
+#      http://www.apache.org/licenses/LICENSE-2.0/                                        #
+#                                                                             #
+#  or in the "license" file accompanying this file. This file is distributed  #
+#  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express #
+#  or implied. See the License for the specific language governing permis-    #
+#  sions and limitations under the License.                                   #
+###############################################################################
 
 import os
 from unittest import mock
@@ -29,30 +41,34 @@ def setupevent(request):
     event = {
         "Payload": {
             "body": {
-                "ForensicInstanceId": "i-04a5fde997d49e225",
+                "ForensicInstanceIds": ["i-04a5fde997d49e225"],
                 "forensicType": "MEMORY",
                 "ForensicInvestigationInstanceId": "i-04a5fde997d49e225",
-                "MemoryAcquisition": {
-                    "CommandId": "73f4f7bb-53a7-4397-8085-c5b6baa8a126",
-                    "CommandIdArtifactMap": {
-                        "73f4f7bb-53a7-4397-8085-c5b6baa8a126": {
-                            "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
-                            "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-0trqhNLt4XuA",
-                        }
-                    },
-                    "CommandInputArtifactId": "e53fbc38-f455-4954-a157-bbf6dc53288f",
-                },
-                "MemoryInvestigation": {
-                    "CommandId": "2872b731-b392-4fcb-b169-bdb8a1cfa0df",
-                    "CommandIdArtifactMap": {
-                        "2872b731-b392-4fcb-b169-bdb8a1cfa0df": {
+                "InstanceResults": {
+                    "i-04a5fde997d49e225": {
+                        "MemoryAcquisition": {
+                            "CommandId": "73f4f7bb-53a7-4397-8085-c5b6baa8a126",
+                            "CommandIdArtifactMap": {
+                                "73f4f7bb-53a7-4397-8085-c5b6baa8a126": {
+                                    "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
+                                    "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlinuxlimememoryacquisitionAF2BE0B7-0trqhNLt4XuA",
+                                }
+                            },
                             "CommandInputArtifactId": "e53fbc38-f455-4954-a157-bbf6dc53288f",
-                            "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
-                            "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlimememoryloadinvestigation7F511990-eerQChP8Izey",
-                        }
-                    },
+                        },
+                        "MemoryInvestigation": {
+                            "CommandId": "2872b731-b392-4fcb-b169-bdb8a1cfa0df",
+                            "CommandIdArtifactMap": {
+                                "2872b731-b392-4fcb-b169-bdb8a1cfa0df": {
+                                    "CommandInputArtifactId": "e53fbc38-f455-4954-a157-bbf6dc53288f",
+                                    "Prefix": "memory/i-0d02bff5f6d29258d/fbd6b0d3-a203-401c-86cd-1f679109ac7a",
+                                    "SSMDocumentName": "ForensicSolutionStack-ForensicSSMDBuilderStackSSMDocumentlimememoryloadinvestigation7F511990-eerQChP8Izey",
+                                }
+                            },
+                        },
+                        "SSM_STATUS": "SUCCEEDED",
+                    }
                 },
-                "SSM_STATUS": "SUCCEEDED",
                 "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
                 "isMemoryAcquisitionComplete": "TRUE",
                 "isAcquisitionRequired": True,
