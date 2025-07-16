@@ -8,6 +8,7 @@ coverage/
 output/
 .DS_Store
 .lcov
+.kiro
 
 *.d.ts
 
