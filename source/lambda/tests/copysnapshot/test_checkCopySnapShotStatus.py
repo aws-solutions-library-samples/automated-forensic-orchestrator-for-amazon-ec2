@@ -23,9 +23,10 @@ import pytest
 
 from ...src.common.awsapi_cached_client import AWSCachedClient, BotoSession
 from ...src.copysnapshot import checkCopySnapShotStatus
+from ...src.data.datatypes import ForensicsProcessingPhase
+from ...src.common.exception import DiskAcquisitionError
 
-
-@pytest.fixture()
+@pytest.fixture
 def eb_event():
     return {
         "Payload": {
@@ -85,177 +86,9 @@ def forensic_record():
                     }
                 },
                 "EnclaveOptions": {"M": {"Enabled": {"BOOL": False}}},
-                "NetworkInterfaces": {
-                    "L": [
-                        {
-                            "M": {
-                                "Status": {"S": "in-use"},
-                                "Description": {
-                                    "S": "Primary network interface"
-                                },
-                                "PrivateDnsName": {
-                                    "S": "ip-10-0-4-29.ap-southeast-2.compute.internal"
-                                },
-                                "PrivateIpAddress": {"S": "10.0.4.29"},
-                                "PrivateIpAddresses": {
-                                    "L": [
-                                        {
-                                            "M": {
-                                                "Primary": {"BOOL": True},
-                                                "PrivateDnsName": {
-                                                    "S": "ip-10-0-4-29.ap-southeast-2.compute.internal"
-                                                },
-                                                "PrivateIpAddress": {
-                                                    "S": "10.0.4.29"
-                                                },
-                                            }
-                                        }
-                                    ]
-                                },
-                                "Attachment": {
-                                    "M": {
-                                        "Status": {"S": "attached"},
-                                        "NetworkCardIndex": {"N": "0"},
-                                        "AttachmentId": {
-                                            "S": "eni-attach-0908c8c7a432be0b7"
-                                        },
-                                        "DeviceIndex": {"N": "0"},
-                                        "AttachTime": {
-                                            "S": "2021-11-18T04:58:52+00:00"
-                                        },
-                                        "DeleteOnTermination": {"BOOL": True},
-                                    }
-                                },
-                                "Ipv6Addresses": {"L": []},
-                                "SubnetId": {"S": "subnet-0be828943dae437d0"},
-                                "MacAddress": {"S": "02:4b:07:fd:ec:e4"},
-                                "NetworkInterfaceId": {
-                                    "S": "eni-06c16aff96eb76787"
-                                },
-                                "SourceDestCheck": {"BOOL": True},
-                                "InterfaceType": {"S": "interface"},
-                                "OwnerId": {"S": "123456789012"},
-                                "VpcId": {"S": "vpc-0c315768612ee4eb1"},
-                                "Groups": {
-                                    "L": [
-                                        {
-                                            "M": {
-                                                "GroupName": {
-                                                    "S": "launch-wizard-2"
-                                                },
-                                                "GroupId": {
-                                                    "S": "sg-0921dc1131442951f"
-                                                },
-                                            }
-                                        }
-                                    ]
-                                },
-                            }
-                        }
-                    ]
-                },
-                "ImageId": {"S": "ami-043e0add5c8665836"},
-                "InstanceType": {"S": "t2.micro"},
-                "Monitoring": {"M": {"State": {"S": "disabled"}}},
-                "Tags": {
-                    "L": [
-                        {
-                            "M": {
-                                "Value": {"S": "DEV"},
-                                "Key": {"S": "Patch Group"},
-                            }
-                        }
-                    ]
-                },
-                "ProductCodes": {"L": []},
-                "HibernationOptions": {"M": {"Configured": {"BOOL": False}}},
-                "LaunchTime": {"S": "2021-11-18T04:58:52+00:00"},
-                "Architecture": {"S": "x86_64"},
-                "MetadataOptions": {
-                    "M": {
-                        "HttpPutResponseHopLimit": {"N": "1"},
-                        "HttpProtocolIpv6": {"S": "disabled"},
-                        "HttpTokens": {"S": "optional"},
-                        "HttpEndpoint": {"S": "enabled"},
-                        "State": {"S": "applied"},
-                    }
-                },
-                "Hypervisor": {"S": "xen"},
-                "InstanceId": {"S": "i-0e7c6b5d34c76650a"},
-                "VirtualizationType": {"S": "hvm"},
-                "CpuOptions": {
-                    "M": {
-                        "ThreadsPerCore": {"N": "1"},
-                        "CoreCount": {"N": "1"},
-                    }
-                },
-                "UsageOperationUpdateTime": {"S": "2021-11-18T04:58:52+00:00"},
-                "PublicDnsName": {"S": ""},
-                "KeyName": {"S": "personal_isengard_key"},
-                "RootDeviceType": {"S": "ebs"},
-                "SourceDestCheck": {"BOOL": True},
-                "AmiLaunchIndex": {"N": "0"},
-                "VpcId": {"S": "vpc-0c315768612ee4eb1"},
-                "State": {
-                    "M": {"Code": {"N": "16"}, "Name": {"S": "running"}}
-                },
-                "StateTransitionReason": {"S": ""},
-                "ClientToken": {"S": ""},
-                "UsageOperation": {"S": "RunInstances"},
-                "CapacityReservationSpecification": {
-                    "M": {"CapacityReservationPreference": {"S": "open"}}
-                },
             }
-        },
-        "creationTime": {"S": "2022-02-18T01:24:44.104700+00:00"},
-        "awsAccountId": {"S": "123456789012"},
-        "diskAnalysisStatus": {"S": "ACQUISITION"},
-        "associatedFindings": {
-            "L": [
-                {
-                    "M": {
-                        "region": {"S": "ap-southeast-2"},
-                        "service": {"S": "securityhub"},
-                        "id": {
-                            "S": "arn:aws:securityhub:ap-southeast-2:123456789012:subscription/aws-foundational-security-best-practices/v/1.0.0/EC2.8/finding/482e8524-4f22-4a27-9dba-b8a582f24529"
-                        },
-                    }
-                }
-            ]
-        },
-        "lastUpdatedTime": {"S": "2022-02-18T01:24:51.518344+00:00"},
-        "GSI1SK": {
-            "S": "#REGION#ap-southeast-2#ResourceType.INSTANCE#i-01abc123def"
-        },
-        "awsRegion": {"S": "ap-southeast-2"},
-        "memoryAnalysisStatus": {"S": "ACQUISITION"},
-        "triageStatus": {"S": "SUCCESS"},
-        "GSI1PK": {"S": "123456789012"},
-        "resourceType": {"S": "INSTANCE"},
-        "diskAnalysisStatusDescription": {"S": "Beginning disk acquisition"},
-        "SK": {"S": "RECORD#fbd6b0d3-a203-401c-86cd-1f679109ac7a#METADATA"},
-        "triageStatusDescription": {"S": "Completed triage"},
-        "PK": {"S": "RECORD#fbd6b0d3-a203-401c-86cd-1f679109ac7a"},
-        "id": {"S": "fbd6b0d3-a203-401c-86cd-1f679109ac7a"},
-        "memoryAnalysisStatusDescription": {
-            "S": "Beginning memory acquisition"
-        },
-        "sourceAccountSnapshots": {
-            "L": [
-                {
-                    "M": {
-                        "volumeId": {"S": "vol-0d7a6f5a15ef95ea9"},
-                        "snapshotId": {"S": "snap-018eebb9524445e0b"},
-                        "awsAccountId": {"S": "123456789012"},
-                        "region": {"S": "ap-southeast-2"},
-                        "volumeSize": {"N": "8"},
-                    }
-                }
-            ]
-        },
+        }
     }
-
-
 def get_update_record_event():
     return {"Attributes": forensic_record()}
 
@@ -421,6 +254,7 @@ def test_remote_exception():
             "body": {
                 "isSnapShotComplete": False,
                 "isSnapShotCopyComplete": False,
+                "forensicType": "DISK",
                 "snapshotIds": [
                     "snap-097e3ce579357377b",
                     "snap-097e3ce579357377c",
@@ -447,3 +281,470 @@ def test_remote_exception():
         assert execinfo.type == Exception
         update_item_fn.assert_called()
         describe_snapshot_fn.reset_mock()
+
+# New test cases to improve coverage
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_snapshot_not_shared():
+    """Test when isSnapshotShared is False"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-097e3ce579357377b"],
+                "copySnapshotIds": ["snap-097e3ce579357377c"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "snapshotArtifactMap": {
+                    "snap-097e3ce579357377b": "d0b18a74-c2f1-4309-b17d-c8253b01ab29"
+                },
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": False,
+            },
+            "statusCode": 200,
+        }
+    }
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "This is my snapshot.",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-097e3ce579357377b",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-049df61146c4d7901",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isAppCopySnapShotComplete") == True
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_eks_cluster_scenario():
+    """Test EKS cluster scenario with multiple nodes"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": True,
+                "clusterInfo": {
+                    "clusterName": "test-cluster",
+                    "affectedNode": ["i-123", "i-456"],
+                },
+                "snapshotIds": ["snap-123", "snap-456"],
+            },
+            "statusCode": 200,
+        }
+    }
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "EKS node snapshot",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-123",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-123",
+                "VolumeSize": 8,
+            },
+            {
+                "Description": "EKS node snapshot",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-456",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-456",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isSnapShotCopyComplete") == True
+        assert "clusterInfo" in ret.get("body")
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_mixed_snapshot_states():
+    """Test when some snapshots are completed and others are still pending"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-123", "snap-456"],
+                "copySnapshotIds": ["snap-789", "snap-abc"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": True,
+            },
+            "statusCode": 200,
+        }
+    }
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "This is my snapshot.",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-123",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-123",
+                "VolumeSize": 8,
+            },
+            {
+                "Description": "This is my snapshot.",
+                "OwnerId": "123456789012",
+                "Progress": "50%",
+                "SnapshotId": "snap-456",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "pending",
+                "VolumeId": "vol-456",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isSnapShotCopyComplete") == False
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_empty_snapshots_list():
+    """Test when the snapshots list is empty"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": [],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": True,
+            },
+            "statusCode": 200,
+        }
+    }
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        # An empty list should be considered "complete" since there's nothing to wait for
+        assert ret.get("body").get("isSnapShotCopyComplete") == True
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_specific_error_handling():
+    """Test specific error handling with DiskAcquisitionError"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-123"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": True,
+            },
+            "statusCode": 200,
+        }
+    }
+    
+    # Simulate a specific AWS error
+    describe_snapshot_fn.side_effect = boto3.exceptions.Boto3Error("Snapshot not found")
+    
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ), pytest.raises(DiskAcquisitionError) as execinfo:
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        checkCopySnapShotStatus.handler(event, context)
+        
+        # Verify the error details
+        assert "errorName" in execinfo.value.args[0]
+        assert "errorDescription" in execinfo.value.args[0]
+        assert "errorPhase" in execinfo.value.args[0]
+        assert execinfo.value.args[0]["errorPhase"] == ForensicsProcessingPhase.ACQUISITION.name
+        assert execinfo.value.args[0]["errorComponentId"] == "checkCopySnapShotStatus"
+
+
+def test_all_snapshots_completed_function():
+    """Test the all_snapshots_completed function directly"""
+    # Test with all completed snapshots
+    snapshots = {
+        "Snapshots": [
+            {"State": "completed"},
+            {"State": "completed"},
+            {"State": "completed"}
+        ]
+    }
+    assert checkCopySnapShotStatus.all_snapshots_completed(snapshots) == True
+    
+    # Test with mixed states
+    snapshots = {
+        "Snapshots": [
+            {"State": "completed"},
+            {"State": "pending"},
+            {"State": "completed"}
+        ]
+    }
+    assert checkCopySnapShotStatus.all_snapshots_completed(snapshots) == False
+    
+    # Test with all pending snapshots
+    snapshots = {
+        "Snapshots": [
+            {"State": "pending"},
+            {"State": "pending"}
+        ]
+    }
+    assert checkCopySnapShotStatus.all_snapshots_completed(snapshots) == False
+    
+    # Test with other states
+    snapshots = {
+        "Snapshots": [
+            {"State": "error"},
+            {"State": "completed"}
+        ]
+    }
+    assert checkCopySnapShotStatus.all_snapshots_completed(snapshots) == False
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "TRUE",  # Different from other tests
+    },
+)
+def test_app_account_copy_enabled():
+    """Test when APP_ACCOUNT_COPY is set to TRUE"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-123"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": False,
+            },
+            "statusCode": 200,
+        }
+    }
+    
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "This is my snapshot.",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-123",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-123",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isAppCopySnapShotComplete") == True
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_different_snapshot_states():
+    """Test with snapshots in different states"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-123", "snap-456", "snap-789"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": True,
+            },
+            "statusCode": 200,
+        }
+    }
+    
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "Snapshot 1",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-123",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-123",
+                "VolumeSize": 8,
+            },
+            {
+                "Description": "Snapshot 2",
+                "OwnerId": "123456789012",
+                "Progress": "50%",
+                "SnapshotId": "snap-456",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "pending",
+                "VolumeId": "vol-456",
+                "VolumeSize": 8,
+            },
+            {
+                "Description": "Snapshot 3",
+                "OwnerId": "123456789012",
+                "Progress": "0%",
+                "SnapshotId": "snap-789",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "error",
+                "VolumeId": "vol-789",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isSnapShotCopyComplete") == False
