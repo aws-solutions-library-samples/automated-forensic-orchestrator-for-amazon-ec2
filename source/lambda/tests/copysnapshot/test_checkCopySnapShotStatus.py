@@ -24,9 +24,9 @@ import pytest
 from ...src.common.awsapi_cached_client import AWSCachedClient, BotoSession
 from ...src.copysnapshot import checkCopySnapShotStatus
 from ...src.data.datatypes import ForensicsProcessingPhase
+from ...src.common.exception import DiskAcquisitionError
 
-
-@pytest.fixture()
+@pytest.fixture
 def eb_event():
     return {
         "Payload": {
@@ -89,8 +89,6 @@ def forensic_record():
             }
         }
     }
-
-
 def get_update_record_event():
     return {"Attributes": forensic_record()}
 
@@ -283,7 +281,6 @@ def test_remote_exception():
         assert execinfo.type == Exception
         update_item_fn.assert_called()
         describe_snapshot_fn.reset_mock()
-
 
 # New test cases to improve coverage
 
@@ -565,7 +562,7 @@ def test_specific_error_handling():
         checkCopySnapShotStatus,
         "create_aws_client",
         Mock(return_value=mock_connection({})),
-    ), pytest.raises(Exception) as execinfo:
+    ), pytest.raises(DiskAcquisitionError) as execinfo:
         context = MagicMock()
         context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
         checkCopySnapShotStatus.handler(event, context)
@@ -578,15 +575,6 @@ def test_specific_error_handling():
         assert execinfo.value.args[0]["errorComponentId"] == "checkCopySnapShotStatus"
 
 
-@mock.patch.dict(
-    os.environ,
-    {
-        "AWS_REGION": "ap-southeast-2",
-        "INSTANCE_TABLE_NAME": "table",
-        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
-        "APP_ACCOUNT_COPY": "FALSE",
-    },
-)
 def test_all_snapshots_completed_function():
     """Test the all_snapshots_completed function directly"""
     # Test with all completed snapshots
@@ -626,3 +614,137 @@ def test_all_snapshots_completed_function():
         ]
     }
     assert checkCopySnapShotStatus.all_snapshots_completed(snapshots) == False
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "TRUE",  # Different from other tests
+    },
+)
+def test_app_account_copy_enabled():
+    """Test when APP_ACCOUNT_COPY is set to TRUE"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-123"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": False,
+            },
+            "statusCode": 200,
+        }
+    }
+    
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "This is my snapshot.",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-123",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-123",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isAppCopySnapShotComplete") == True
+
+
+@mock.patch.dict(
+    os.environ,
+    {
+        "AWS_REGION": "ap-southeast-2",
+        "INSTANCE_TABLE_NAME": "table",
+        "APP_ACCOUNT_ROLE": "ForensicEc2AllowAccessRole",
+        "APP_ACCOUNT_COPY": "FALSE",
+    },
+)
+def test_different_snapshot_states():
+    """Test with snapshots in different states"""
+    event = {
+        "Payload": {
+            "body": {
+                "forensicType": "DISK",
+                "isSnapShotComplete": False,
+                "isSnapShotCopyComplete": False,
+                "snapshotIds": ["snap-123", "snap-456", "snap-789"],
+                "instanceAccount": "123456789012",
+                "instanceRegion": "ap-southeast-2",
+                "forensicId": "1c5b3574-8e67-4fc8-a34e-fe480534ccc1",
+                "isSnapshotShared": True,
+            },
+            "statusCode": 200,
+        }
+    }
+    
+    # Reset the side_effect that might have been set by other tests
+    describe_snapshot_fn.side_effect = None
+    describe_snapshot_fn.return_value = {
+        "NextToken": "",
+        "Snapshots": [
+            {
+                "Description": "Snapshot 1",
+                "OwnerId": "123456789012",
+                "Progress": "100%",
+                "SnapshotId": "snap-123",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "completed",
+                "VolumeId": "vol-123",
+                "VolumeSize": 8,
+            },
+            {
+                "Description": "Snapshot 2",
+                "OwnerId": "123456789012",
+                "Progress": "50%",
+                "SnapshotId": "snap-456",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "pending",
+                "VolumeId": "vol-456",
+                "VolumeSize": 8,
+            },
+            {
+                "Description": "Snapshot 3",
+                "OwnerId": "123456789012",
+                "Progress": "0%",
+                "SnapshotId": "snap-789",
+                "StartTime": "2021-11-22T21:14:34.523622",
+                "State": "error",
+                "VolumeId": "vol-789",
+                "VolumeSize": 8,
+            },
+        ],
+    }
+
+    with patch.object(
+        checkCopySnapShotStatus,
+        "create_aws_client",
+        Mock(return_value=mock_connection({})),
+    ):
+        context = MagicMock()
+        context.invoked_function_arn = "arn:aws:lambda:ap-southeast-2:123456789012:function:ForensicSolutionStack-forensicsDiskAcquisitionshar-wXRzDyfmUixV"
+        ret = checkCopySnapShotStatus.handler(event, context)
+        assert ret.get("statusCode") == 200
+        assert ret.get("body").get("isSnapShotCopyComplete") == False

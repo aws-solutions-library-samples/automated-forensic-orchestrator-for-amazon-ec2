@@ -22,6 +22,9 @@ import pytest
 import sys
 
 
+# Import the actual implementation for direct testing
+from ...src.acquisition.shareSnapShot import _share_snapshot as actual_share_snapshot
+
 # Mock the classes and functions we need
 class DiskAcquisitionError(Exception):
     """Mock DiskAcquisitionError for testing"""
@@ -653,6 +656,33 @@ class TestShareSnapshot:
         
         # Call the mock function
         result = _share_snapshot(
+            ec2_client=mock_ec2_client,
+            target_account_id="123456789012",
+            snapshot_id="snap-123",
+            solution_account="654321098765"
+        )
+        
+        # Verify results
+        assert result == {"Return": True}
+        
+        # Verify that modify_snapshot_attribute was called with correct parameters
+        mock_ec2_client.modify_snapshot_attribute.assert_called_once_with(
+            Attribute="createVolumePermission",
+            CreateVolumePermission={"Add": [{"UserId": "654321098765"}]},
+            OperationType="add",
+            SnapshotId="snap-123",
+            UserIds=["123456789012"],
+            DryRun=False,
+        )
+        
+    def test_share_snapshot_function_direct(self):
+        """Test the actual _share_snapshot function directly"""
+        # Create mock EC2 client
+        mock_ec2_client = MagicMock()
+        mock_ec2_client.modify_snapshot_attribute.return_value = {"Return": True}
+        
+        # Call the actual implementation function
+        result = actual_share_snapshot(
             ec2_client=mock_ec2_client,
             target_account_id="123456789012",
             snapshot_id="snap-123",
