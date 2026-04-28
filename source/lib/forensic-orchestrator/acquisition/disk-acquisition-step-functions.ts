@@ -17,6 +17,7 @@ import {
     Chain,
     Choice,
     Condition,
+    DefinitionBody,
     Fail,
     IStateMachine,
     LogLevel,
@@ -265,7 +266,7 @@ export class DiskAcquisitionConstruct extends Construct {
             this,
             'Acquisition Disk StateMachine',
             {
-                definition: chain,
+                definitionBody: DefinitionBody.fromChainable(chain),
                 stateMachineName: 'Disk-Forensics-Acquisition-Function',
                 tracingEnabled: true,
                 logs: {

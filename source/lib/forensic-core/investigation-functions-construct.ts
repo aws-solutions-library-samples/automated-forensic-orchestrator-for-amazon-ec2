@@ -35,6 +35,7 @@ import {
     Chain,
     Choice,
     Condition,
+    DefinitionBody,
     LogLevel,
     StateMachine,
     Wait,
@@ -669,7 +670,7 @@ export class ForensicsInvestigationConstruct extends Construct {
             this,
             'ForensicsProfileBuilderStateMachine',
             {
-                definition: chain,
+                definitionBody: DefinitionBody.fromChainable(chain),
                 stateMachineName: 'Forensic-Profile-Function',
                 tracingEnabled: true,
                 logs: {

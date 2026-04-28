@@ -18,6 +18,7 @@ import {
     Chain,
     Choice,
     Condition,
+    DefinitionBody,
     IntegrationPattern,
     IStateMachine,
     LogLevel,
@@ -179,7 +180,7 @@ export class TriageOrchestratorConstruct extends Construct {
         
 
         this.triageStepfunction = new StateMachine(this, 'ForensicsTriageStateMachine', {
-            definition: chain,
+            definitionBody: DefinitionBody.fromChainable(chain),
             stateMachineName: 'Forensic-Triage-Function',
             tracingEnabled: true,
             logs: {

@@ -687,11 +687,17 @@ export class ForensicsSolutionsConstructsStack extends Stack {
         const customIsolationActionARN = `arn:aws:securityhub:${props?.env?.region}:${secHubAccount}:action/custom/ForensicIsolateAct`;
 
         new events.CfnEventBusPolicy(this, 'secHubEventBusPolicy', {
-            // the properties below are optional
-            action: 'events:PutEvents',
             eventBusName: 'default',
-            principal: secHubAccount,
             statementId: `AcceptFrom${secHubAccount}`,
+            statement: {
+                Sid: `AcceptFrom${secHubAccount}`,
+                Effect: 'Allow',
+                Principal: {
+                    AWS: `arn:aws:iam::${secHubAccount}:root`,
+                },
+                Action: 'events:PutEvents',
+                Resource: `arn:aws:events:${Stack.of(this).region}:${Stack.of(this).account}:event-bus/default`,
+            },
         });
 
         const eventRuleNestedConstruct = new AWSEventRuleConstruct(

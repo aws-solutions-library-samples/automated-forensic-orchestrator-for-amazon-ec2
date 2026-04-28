@@ -150,7 +150,7 @@ export class AWSAppSyncApiConstruct extends Construct {
         return {
             cloudWatchLogsRoleArn: logsRoleArn,
             excludeVerboseContent: false,
-            fieldLogLevel: config.fieldLogLevel,
+            fieldLogLevel: config.fieldLogLevel ?? FieldLogLevel.ERROR,
         };
     }
 

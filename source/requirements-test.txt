@@ -59,7 +59,7 @@ pylint==3.2.3
     # via -r requirements-test.in
 pytest==7.4.4
     # via -r requirements-test.in
-requests==2.32.0
+requests==2.32.4
     # via -r requirements-test.in
 tomli==2.0.1
     # via
