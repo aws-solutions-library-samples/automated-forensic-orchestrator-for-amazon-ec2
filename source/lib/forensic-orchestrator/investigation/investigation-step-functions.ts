@@ -17,6 +17,7 @@ import {
     Chain,
     Choice,
     Condition,
+    DefinitionBody,
     Fail,
     IStateMachine,
     LogLevel,
@@ -213,7 +214,7 @@ export class InvestigationStepConstruct extends Construct {
             this,
             'Investigation StateMachine',
             {
-                definition: chain,
+                definitionBody: DefinitionBody.fromChainable(chain),
                 stateMachineName: 'Forensic-Investigation-Function',
                 tracingEnabled: true,
                 logs: {

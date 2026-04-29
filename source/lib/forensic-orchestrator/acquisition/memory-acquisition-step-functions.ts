@@ -17,6 +17,7 @@ import {
     Chain,
     Choice,
     Condition,
+    DefinitionBody,
     Fail,
     IStateMachine,
     LogLevel,
@@ -169,7 +170,7 @@ export class MemoryAcquisitionConstruct extends Construct {
             this,
             'Acquisition Memory StateMachine',
             {
-                definition: chain,
+                definitionBody: DefinitionBody.fromChainable(chain),
                 stateMachineName: 'Memory-Forensics-Acquisition-Function',
                 tracingEnabled: true,
                 logs: {

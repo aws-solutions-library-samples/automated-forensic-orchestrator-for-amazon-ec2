@@ -21,6 +21,7 @@ import {
     InterfaceVpcEndpoint,
     InterfaceVpcEndpointAwsService,
     InterfaceVpcEndpointService,
+    IpAddresses,
     ISecurityGroup,
     IVpc,
     NatProvider,
@@ -94,7 +95,7 @@ export class AWSBaseInfraConstruct extends Construct {
         const maxAZs = props?.maxAZs || 2;
 
         this.vpc = new Vpc(this, 'vpc', {
-            cidr: vpcCidr,
+            ipAddresses: IpAddresses.cidr(vpcCidr),
             enableDnsHostnames: true,
             enableDnsSupport: true,
             maxAzs: maxAZs,

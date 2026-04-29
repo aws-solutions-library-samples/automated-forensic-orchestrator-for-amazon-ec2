@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2026-04-28
+
+### Changed
+
+- Replaced deprecated CDK APIs: `VpcProps.cidr` → `ipAddresses`, `TableOptions.pointInTimeRecovery` → `pointInTimeRecoverySpecification`, `StateMachineProps.definition` → `definitionBody`
+- Bumped `aws-cdk` 2.1019.1 → 2.1119.0, `aws-cdk-lib` 2.202.0 → 2.251.0, `cdk-nag` 2.26.19 → 2.38.2, `constructs` → 10.6.0
+- Bumped all `@aws-sdk/client-*` packages to 3.1038.0 (resolves Dependabot PR #35 transitive `@smithy/config-resolver`)
+- Bumped `@babel/core` 7.26.10 → 7.29.0, `ts-jest` 29.1.0 → 29.4.9, `ts-node` 10.8.2 → 10.9.2, `eslint-config-prettier` → 8.10.2
+- Bumped Python `requests` to 2.32.4 and `certifi` to 2024.7.4 (resolves Dependabot PRs #29, #31, #33)
+- Untracked `source/cdk.context.json` (per `.gitignore`); lookups now regenerate per environment
+
 ## [1.3.1] - 2025-07-18
 
 ### Changed
