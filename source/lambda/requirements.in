@@ -21,4 +21,4 @@ eks-token==0.3.0
 # 31 to 36 is free of known advisories, so there is no security cost.
 kubernetes==35.0.0
 requests==2.34.2
-urllib3==2.7.0
+urllib3==2.8.0
