@@ -6,15 +6,15 @@
 # `make bandit`, which `make fmt` and `make lint` depend on.
 bandit==1.9.4
 black==26.5.1
-coverage==7.15.4
-flake8==7.3.0
+coverage==7.16.2
+flake8==7.4.1
 mypy==1.20.2
 mypy-extensions==1.1.0
 pylint==3.3.9
 pytest==9.1.1
 pytest-cov==7.1.0
-pytest-env==1.7.0
-pytest-mock==3.15.1
+pytest-env==1.7.1
+pytest-mock==3.16.0
 requests==2.34.2
 types-requests==2.33.0.20260712
-urllib3==2.7.0
+urllib3==2.8.0
