@@ -103,7 +103,7 @@ types-requests==2.33.0.20260712
     # via -r requirements-test.in
 typing-extensions==4.16.0
     # via mypy
-urllib3==2.7.0
+urllib3==2.8.0
     # via
     #   -r requirements-test.in
     #   requests
