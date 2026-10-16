@@ -94,8 +94,8 @@ class TestResourceTypeValidation:
         with pytest.raises(ValueError, match="Invalid trigger event"):
             app.is_ec2_or_eks_in_scope(event)
 
-    def test_is_ec2_or_eks_in_scope_multiple_resources(self):
-        """Test multiple resources raises ValueError"""
+    def test_is_ec2_or_eks_in_scope_ec2_and_eks_without_arns_fails_closed(self):
+        """Test EC2 + EKS without ARNs raises ValueError (cannot match account/region)"""
         event = {
             "detail": {
                 "findings": [
@@ -109,7 +109,7 @@ class TestResourceTypeValidation:
             }
         }
         with pytest.raises(
-            ValueError, match="More than one instance or EKS cluster"
+            ValueError, match="Cannot determine account and region"
         ):
             app.is_ec2_or_eks_in_scope(event)
 
@@ -118,8 +118,8 @@ class TestResourceTypeValidation:
         event = {
             "detail": {"findings": [{"Resources": [{"Type": "AwsS3Bucket"}]}]}
         }
-        # Should filter out unsupported resources and raise IndexError when accessing empty list
-        with pytest.raises(IndexError):
+        # Unsupported resources are ignored, leaving nothing in scope
+        with pytest.raises(ValueError, match="No EC2 instance or EKS cluster"):
             app.is_ec2_or_eks_in_scope(event)
 
 
