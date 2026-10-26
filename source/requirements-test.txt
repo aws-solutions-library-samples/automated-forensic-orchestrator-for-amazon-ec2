@@ -10,7 +10,7 @@ bandit==1.9.4
     # via -r requirements-test.in
 black==26.5.1
     # via -r requirements-test.in
-certifi==2026.7.22
+certifi==2026.10.19
     # via requests
 charset-normalizer==3.5.1
     # via requests
