@@ -5,7 +5,7 @@
 # pytest/pytest-cov/pytest-env/pytest-mock drive `make test`; bandit drives
 # `make bandit`, which `make fmt` and `make lint` depend on.
 bandit==1.9.4
-black==26.5.1
+black==26.10.1
 coverage==7.15.4
 flake8==7.3.0
 mypy==1.20.2
