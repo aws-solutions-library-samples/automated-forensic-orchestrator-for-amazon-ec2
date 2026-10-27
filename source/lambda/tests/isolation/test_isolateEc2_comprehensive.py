@@ -450,7 +450,7 @@ class TestIsolateEc2:
     )
     @patch("lambda.src.isolation.isolateEc2.ForensicDataService")
     @patch("lambda.src.isolation.isolateEc2.create_aws_client")
-    @patch("lambda.src.isolation.isolateEc2.eks_cordon_node")
+    @patch("lambda.src.isolation.isolateEc2.eks_cordon_nodes_by_instance_id")
     def test_eks_isolation_error(
         self, 
         mock_eks_cordon_node,

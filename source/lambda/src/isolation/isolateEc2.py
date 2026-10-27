@@ -76,7 +76,36 @@ def handler(event, context):
         record_id=forensic_id, metadata_only=True
     )
     if "clusterInfo" in input_body:
-        resource_type = input_body["clusterInfo"]["affectedResourceType"]
+        cluster_info = input_body["clusterInfo"]
+        resource_type = cluster_info["affectedResourceType"]
+        # Missing means the payload predates the flag; those nodes were
+        # always looked up through the Kubernetes API, so treat as confirmed.
+        node_confirmed = cluster_info.get("nodeConfirmed", True)
+        if node_confirmed is not True:
+            logger.warning(
+                f"Node(s) {cluster_info.get('affectedNode')} not confirmed "
+                f"as members of cluster {cluster_info.get('clusterName')}; "
+                "skipping Kubernetes isolation"
+            )
+            fds.add_forensic_timeline_event(
+                id=forensic_id,
+                name="EKS isolation skipped",
+                description=(
+                    f"Node(s) {cluster_info.get('affectedNode')} not "
+                    "confirmed as members of cluster "
+                    f"{cluster_info.get('clusterName')}; Kubernetes "
+                    "isolation skipped"
+                ),
+                phase=ForensicsProcessingPhase.ISOLATION_FAILED,
+                component_id="isolateEksCluster",
+                component_type="Lambda",
+                event_data={
+                    "affectedNode": cluster_info.get("affectedNode"),
+                    "clusterName": cluster_info.get("clusterName"),
+                    "nodeConfirmed": node_confirmed,
+                },
+            )
+            return create_response(200, output)
         current_account = context.invoked_function_arn.split(":")[4]
         cluster_account = input_body["instanceAccount"]
         cluster_region = input_body["instanceRegion"]
@@ -103,7 +132,9 @@ def handler(event, context):
             app_account_role=app_account_role,
         )
         # Containment of Pods , Nodes attached to that
-        if resource_type == "Pods" or "Deployment" or "ServiceAccount":
+        # `x == "Pods" or "Deployment" or ...` was always true, so the Node
+        # branch below could never run.
+        if resource_type in ("Pods", "Deployment", "ServiceAccount"):
             try:
                 # Label the pod to be Qurantined
                 eks_label_pod(input_body, eks_client, app_account_role_arn)
@@ -142,9 +173,14 @@ def handler(event, context):
                     event_data=exception_obj,
                 )
         elif resource_type == "Node":
+            instance_id = None
+            original_sg_ids = []
             try:
-                # Cordon the node
-                eks_cordon_node(input_body, eks_client, app_account_role_arn)
+                # Cordon the node. A Node finding has no pods to walk, so
+                # find the node by its instance id.
+                eks_cordon_nodes_by_instance_id(
+                    input_body, eks_client, app_account_role_arn
+                )
                 # Revoke session credentials from IAM Role
                 invalid_existing_credential_sessions(
                     iam_client, forensic_record
@@ -176,9 +212,13 @@ def handler(event, context):
                 instance_vpc = input_body.get("instanceInfo")[0].get("VpcId")
                 enable_evidence_protection(instance_id, ec2_client)
 
+                # For EKS records resourceInfo is the cluster info, so the
+                # block devices come from the node's instance info.
                 enable_evidence_protection_ebs(
                     instance_id,
-                    forensic_record.resourceInfo["BlockDeviceMappings"],
+                    input_body.get("instanceInfo")[0].get(
+                        "BlockDeviceMappings", []
+                    ),
                     ec2_client,
                 )
 
@@ -223,12 +263,13 @@ def handler(event, context):
             except Exception as e:
                 logger.error(f"isolation failed, {e}")
                 # best effort to revert back to original sgs
-                try:
-                    ec2_client.modify_instance_attribute(
-                        InstanceId=instance_id, Groups=original_sg_ids
-                    )
-                except ForensicLambdaExecutionException:
-                    logger.error("isolation reverting failed, abort")
+                if instance_id and original_sg_ids:
+                    try:
+                        ec2_client.modify_instance_attribute(
+                            InstanceId=instance_id, Groups=original_sg_ids
+                        )
+                    except ForensicLambdaExecutionException:
+                        logger.error("isolation reverting failed, abort")
                 # revert to original sg groups
                 exception_type = e.__class__.__name__
                 exception_message = str(e)
@@ -247,6 +288,23 @@ def handler(event, context):
                     component_type="Lambda",
                     event_data=exception_obj,
                 )
+        else:
+            logger.error(
+                f"Unsupported EKS affected resource type {resource_type}; "
+                "no isolation performed"
+            )
+            fds.add_forensic_timeline_event(
+                id=forensic_id,
+                name=f"{resource_type} isolation failed",
+                description=(
+                    f"Unsupported affected resource type {resource_type} "
+                    "for AwsEKSCluster; no isolation actions taken"
+                ),
+                phase=ForensicsProcessingPhase.ISOLATION_FAILED,
+                component_id="isolateEksCluster",
+                component_type="Lambda",
+                event_data={"affectedResourceType": resource_type},
+            )
     else:
         app_account_region = input_body.get("instanceRegion")
         instance_id = input_body.get("instanceInfo").get("InstanceId")
@@ -640,6 +698,42 @@ def eks_cordon_node(input_body, eks_client, cluster_admin_role_arn):
                     time.sleep(10)
 
 
+def eks_cordon_nodes_by_instance_id(
+    input_body, eks_client, cluster_admin_role_arn
+):
+    """
+    Cordon the cluster nodes whose providerID names an affected instance.
+
+    eks_cordon_node finds nodes through the affected pods, and a Node finding
+    has none.
+    """
+    affected_cluster = input_body["clusterInfo"]["clusterName"]
+    targets = set(input_body["clusterInfo"]["affectedNode"])
+    get_kubeconfig = get_eks_credentials(
+        affected_cluster, eks_client, cluster_admin_role_arn
+    )
+    config.load_kube_config_from_dict(config_dict=get_kubeconfig)
+    api_instance = client.CoreV1Api()
+    token = None
+    while True:
+        response = api_instance.list_node(limit=100, _continue=token)
+        for node in response.items:
+            provider_id = node.spec.provider_id or ""
+            if provider_id.rsplit("/", 1)[-1] not in targets:
+                continue
+            node_name = node.metadata.name
+            if node.spec.unschedulable:
+                logger.info(f"Node {node_name} is already cordoned. Skipping.")
+            else:
+                logger.info(f"Cordoning the node {node_name}")
+                api_instance.patch_node(
+                    node_name, {"spec": {"unschedulable": True}}
+                )
+        token = response.metadata._continue
+        if not token:
+            break
+
+
 def invalid_existing_credential_sessions(iam_client, forensic_record):
     resource_type = forensic_record.resourceType
     logger.info(f"Process resource type: {resource_type}")
@@ -649,12 +743,17 @@ def invalid_existing_credential_sessions(iam_client, forensic_record):
             "IamInstanceProfile"
         ]["Arn"]
     else:
-        instance_profile = forensic_record.resourceInfo[0][
-            "IamInstanceProfile"
-        ]
-        instance_profile_arn = forensic_record.resourceInfo[0][
-            "IamInstanceProfile"
-        ]["Arn"]
+        # EKS records store the cluster info, which holds the node list.
+        info = forensic_record.resourceInfo
+        node_info = (
+            info["instanceInfo"][0]
+            if isinstance(info, dict) and "instanceInfo" in info
+            else info[0]
+        )
+        instance_profile = node_info.get("IamInstanceProfile")
+        if not instance_profile:
+            return
+        instance_profile_arn = instance_profile["Arn"]
     if not instance_profile:
         return
     parsed_arn = arnparse(instance_profile_arn)

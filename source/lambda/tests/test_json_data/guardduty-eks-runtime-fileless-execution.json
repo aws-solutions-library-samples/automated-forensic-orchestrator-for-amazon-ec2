@@ -1,0 +1,204 @@
+{
+  "version": "0",
+  "id": "cfd32c31-daa8-10c5-3b27-484204b63938",
+  "detail-type": "Security Hub Findings - Custom Action",
+  "source": "aws.securityhub",
+  "account": "111122223333",
+  "time": "2026-10-15T08:51:26Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:securityhub:us-east-1:111122223333:action/custom/ForensicTriageAction"
+  ],
+  "detail": {
+    "actionName": "Forensic Triage",
+    "actionDescription": "Trigger Forensic Triage Action",
+    "findings": [
+      {
+        "ProductArn": "arn:aws:securityhub:us-east-1::product/aws/guardduty",
+        "Types": [
+          "TTPs/Defense Evasion/DefenseEvasion:Runtime-FilelessExecution"
+        ],
+        "SourceUrl": "https://us-east-1.console.aws.amazon.com/guardduty/home?region=us-east-1#/findings?macros=current&fId=04d09ccf737e203472a20cdb408c163b",
+        "Description": "The EC2 instance i-07846925b8dd4ff42 has executed the in-memory or shared file memfd:ticket-pr.",
+        "ProductName": "GuardDuty",
+        "FirstObservedAt": "2026-10-14T08:30:22.740Z",
+        "CreatedAt": "2026-10-14T08:54:37.564Z",
+        "LastObservedAt": "2026-10-14T08:30:22.740Z",
+        "CompanyName": "Amazon",
+        "FindingProviderFields": {
+          "Types": [
+            "TTPs/Defense Evasion/DefenseEvasion:Runtime-FilelessExecution"
+          ],
+          "Severity": {
+            "Normalized": 50,
+            "Label": "MEDIUM",
+            "Product": 5
+          }
+        },
+        "ProductFields": {
+          "aws/guardduty/service/additionalInfo/value": "",
+          "aws/guardduty/service/additionalInfo/type": "default",
+          "aws/guardduty/service/archived": "false",
+          "aws/guardduty/service/count": "1",
+          "aws/guardduty/service/detectorId": "aec796afc36413520a65273dd4d48a61",
+          "aws/guardduty/service/eventFirstSeen": "2026-10-14T08:30:22.740Z",
+          "aws/guardduty/service/eventLastSeen": "2026-10-14T08:30:22.740Z",
+          "aws/guardduty/service/featureName": "RuntimeMonitoring",
+          "aws/guardduty/service/runtimeDetails/process/euid": "10001",
+          "aws/guardduty/service/runtimeDetails/process/executablePath": "memfd:ticket-preview-worker",
+          "aws/guardduty/service/runtimeDetails/process/executableSha256": "",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/euid": "10001",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/executablePath": "/safe-extract/7b89efe5c2917064fb7b7aed/diagnostics/preview-helper.bin",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/name": "preview-helper.",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/namespacePid": "7",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/parentUuid": "31645e2d-5b17-3dec-d9f4-ef0fc9b60149",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/pid": "15013",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/startTime": "1791966622.73",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/userId": "10001",
+          "aws/guardduty/service/runtimeDetails/process/lineage.0_/uuid": "232731aa-951a-2626-e6ea-3a6fc0034e8c",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/euid": "10001",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/executablePath": "/usr/local/bin/python3.12",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/name": "python",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/namespacePid": "1",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/parentUuid": "ca529432-c95d-b2d1-540c-acc2462ec2b5",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/pid": "9178",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/startTime": "1791965571.411",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/userId": "10001",
+          "aws/guardduty/service/runtimeDetails/process/lineage.1_/uuid": "31645e2d-5b17-3dec-d9f4-ef0fc9b60149",
+          "aws/guardduty/service/runtimeDetails/process/name": "memfd:ticket-pr",
+          "aws/guardduty/service/runtimeDetails/process/namespacePid": "16",
+          "aws/guardduty/service/runtimeDetails/process/parentUuid": "232731aa-951a-2626-e6ea-3a6fc0034e8c",
+          "aws/guardduty/service/runtimeDetails/process/pid": "15022",
+          "aws/guardduty/service/runtimeDetails/process/pwd": "/opt/ticketing",
+          "aws/guardduty/service/runtimeDetails/process/startTime": "1791966622.742",
+          "aws/guardduty/service/runtimeDetails/process/user": "ticketing",
+          "aws/guardduty/service/runtimeDetails/process/userId": "10001",
+          "aws/guardduty/service/runtimeDetails/process/uuid": "f237c2e0-c119-615a-c71b-5ff43ff1cd7e",
+          "aws/guardduty/service/serviceName": "guardduty",
+          "aws/securityhub/FindingId": "arn:aws:securityhub:us-east-1::product/aws/guardduty/arn:aws:guardduty:us-east-1:111122223333:detector/aec796afc36413520a65273dd4d48a61/finding/04d09ccf737e203472a20cdb408c163b",
+          "aws/securityhub/ProductName": "GuardDuty",
+          "aws/securityhub/CompanyName": "Amazon"
+        },
+        "SchemaVersion": "2018-10-08",
+        "GeneratorId": "arn:aws:guardduty:us-east-1:111122223333:detector/aec796afc36413520a65273dd4d48a61",
+        "Sample": false,
+        "RecordState": "ACTIVE",
+        "Title": "The EC2 instance i-07846925b8dd4ff42 has executed an in-memory or shared file.",
+        "Workflow": {
+          "Status": "NEW"
+        },
+        "Severity": {
+          "Normalized": 50,
+          "Label": "MEDIUM",
+          "Product": 5
+        },
+        "UpdatedAt": "2026-10-14T08:54:37.564Z",
+        "WorkflowState": "NEW",
+        "AwsAccountName": "Example Account",
+        "AwsAccountId": "111122223333",
+        "Region": "us-east-1",
+        "Id": "arn:aws:guardduty:us-east-1:111122223333:detector/aec796afc36413520a65273dd4d48a61/finding/04d09ccf737e203472a20cdb408c163b",
+        "Resources": [
+          {
+            "Partition": "aws",
+            "Type": "AwsEc2Instance",
+            "Owner": {
+              "Account": {
+                "Id": "111122223333"
+              }
+            },
+            "Details": {
+              "AwsEc2Instance": {
+                "Type": "t3.large",
+                "VpcId": "vpc-08a4313621e2d1793",
+                "ImageId": "ami-0168ea3fb7ca2dbbe",
+                "IpV4Addresses": [
+                  "10.42.30.66",
+                  "10.42.28.4",
+                  "10.42.31.215",
+                  "10.42.19.71",
+                  "10.42.24.22",
+                  "10.42.22.96",
+                  "10.42.27.18",
+                  "10.42.17.194",
+                  "10.42.27.67",
+                  "10.42.25.123"
+                ],
+                "SubnetId": "subnet-0a5fee93df8dd8be3",
+                "LaunchedAt": "2026-10-14T07:57:54.000Z",
+                "IamInstanceProfileArn": "arn:aws:iam::111122223333:instance-profile/eks-48d09cb5-20b6-fe57-b547-2c6986a69edf"
+              }
+            },
+            "Region": "us-east-1",
+            "Id": "arn:aws:ec2:us-east-1:111122223333:instance/i-07846925b8dd4ff42",
+            "Tags": {
+              "eks:cluster-name": "anycorp-customer-services-eks",
+              "k8s.io/cluster-autoscaler/enabled": "true",
+              "k8s.io/cluster-autoscaler/anycorp-customer-services-eks": "owned",
+              "aws:ec2launchtemplate:id": "lt-077082ef4be4549b2",
+              "aws:autoscaling:groupName": "eks-system-nodes-48d09cb5-20b6-fe57-b547-2c6986a69edf",
+              "aws:ec2launchtemplate:version": "1",
+              "aws:eks:cluster-name": "anycorp-customer-services-eks",
+              "eks:nodegroup-name": "system-nodes",
+              "kubernetes.io/cluster/anycorp-customer-services-eks": "owned",
+              "aws:ec2:fleet-id": "fleet-51a612ac-5b3f-619e-8c32-0c0aff1ec672"
+            },
+            "Provider": "AWS"
+          },
+          {
+            "Partition": "aws",
+            "Type": "AwsEksCluster",
+            "Owner": {
+              "Account": {
+                "Id": "111122223333"
+              }
+            },
+            "Details": {
+              "Other": {
+                "kubernetesDetails/kubernetesUserDetails": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/containerRuntime": "containerd",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/id": "87b8643042642377c2ebd278a2e4e51de54ac23f77a2d1efe654e6cee488d0f3",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/image": "111122223333.dkr.ecr.us-east-1.amazonaws.com/anycorp-customer-services/ticket-application@sha256:9d9bb4cd4ea345691a7dfc3deb69ecf7b0014ce169c1b042fa69d3da6e7e0409",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/imagePrefix": "111122223333.dkr.ecr.us-east-1.amazonaws.com/anycorp-customer-services",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/imageUid": "sha256:9d9bb4cd4ea345691a7dfc3deb69ecf7b0014ce169c1b042fa69d3da6e7e0409",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/name": "attachment-preview",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/securityContext": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/containers.0_/volumeMounts": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/creationTimestamp": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/hostIPC": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/hostNetwork": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/hostPID": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/labels": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/name": "ticket-application-558f75d74f-kkbl6",
+                "kubernetesDetails/kubernetesWorkloadDetails/namespace": "ticketing",
+                "kubernetesDetails/kubernetesWorkloadDetails/podSecurityContext": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/selector": "",
+                "kubernetesDetails/kubernetesWorkloadDetails/type": "pods",
+                "kubernetesDetails/kubernetesWorkloadDetails/uid": "3c92c036-81c0-4b2f-af6f-93764945adaf",
+                "kubernetesDetails/kubernetesWorkloadDetails/volumes": ""
+              },
+              "AwsEksCluster": {
+                "Arn": "arn:aws:eks:us-east-1:111122223333:cluster/anycorp-customer-services-eks",
+                "ClusterStatus": "ACTIVE",
+                "Name": "anycorp-customer-services-eks"
+              }
+            },
+            "Region": "us-east-1",
+            "Id": "arn:aws:eks:us-east-1:111122223333:cluster/anycorp-customer-services-eks",
+            "Tags": {
+              "Project": "ticket-platform",
+              "aws:cloudformation:stack-name": "AnycorpCustomerServicesEks",
+              "ManagedBy": "AWS-CDK",
+              "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:111122223333:stack/AnycorpCustomerServicesEks/38b99880-c7a3-11f1-80e6-0affdfcbe0c5",
+              "DataClassification": "internal",
+              "Environment": "staging",
+              "aws:cloudformation:logical-id": "Cluster"
+            },
+            "Provider": "AWS"
+          }
+        ],
+        "ProcessedAt": "2026-10-14T08:54:47.731Z"
+      }
+    ]
+  }
+}

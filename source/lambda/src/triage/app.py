@@ -16,7 +16,7 @@
 
 import os
 import time
-from typing import Any, Dict
+from typing import Any, Dict, Optional, Tuple
 
 import botocore
 from arnparse import arnparse
@@ -38,6 +38,15 @@ logger = get_logger(__name__)
 # Get Cluster name
 # cluster_name = os.environ["CLUSTER_NAME"]
 cluster_cache: Dict[str, Any] = {}
+
+EC2_RESOURCE_TYPE = "AwsEc2Instance"
+EKS_RESOURCE_TYPE = "AwsEksCluster"
+# Tags EKS puts on node instances. Optional: a node without them is still
+# triaged, it just has to be confirmed through the Kubernetes API instead.
+EKS_CLUSTER_NAME_TAG_KEYS = ("aws:eks:cluster-name", "eks:cluster-name")
+CONFIRMATION_TAG = "tag"
+CONFIRMATION_KUBERNETES_API = "kubernetes-api"
+CONFIRMATION_UNCONFIRMED = "unconfirmed"
 
 
 @xray_recorder.capture("Forensic Triaging")
@@ -153,6 +162,11 @@ def lambda_handler(event, context):
             )
 
         elif resource_type == "AwsEksCluster":
+            # Read the node before is_single_eks_cluster_in_scope strips the
+            # EC2 resource from the event.
+            pinned_node = get_pinned_node(event)
+            node_confirmed = True
+            confirmation_method = None
             cluster_in_scope, event = is_single_eks_cluster_in_scope(event)
 
             logger.info(f"EKS cluster in scope is {cluster_in_scope}")
@@ -193,7 +207,17 @@ def lambda_handler(event, context):
                 event, cluster_name, eks_client, app_account_role_arn
             )
 
-            if affected_cluster_resource_type == "Node":
+            if pinned_node:
+                # GuardDuty names the node the process ran on, and the pod
+                # may already be gone, so do not look the node up.
+                affected_node_list = [pinned_node["instanceId"]]
+                node_confirmed, confirmation_method = confirm_pinned_node(
+                    pinned_node,
+                    cluster_name,
+                    eks_client,
+                    app_account_role_arn,
+                )
+            elif affected_cluster_resource_type == "Node":
                 affected_node_info = event["detail"]["findings"][0][
                     "Resources"
                 ][0]["Details"]["Other"][
@@ -250,6 +274,37 @@ def lambda_handler(event, context):
                     for finding in related_findings
                 ],
             )
+            if pinned_node:
+                pinned_instance_id = pinned_node["instanceId"]
+                if node_confirmed:
+                    pinned_name = "EKS node pinned from finding"
+                    pinned_description = (
+                        f"Instance {pinned_instance_id} named by the finding "
+                        f"is a node of cluster {cluster_name}"
+                    )
+                else:
+                    pinned_name = "Warning: EKS node not confirmed"
+                    pinned_description = (
+                        f"Instance {pinned_instance_id} could not be "
+                        f"confirmed as a node of cluster {cluster_name}; "
+                        "evidence capture continues and Kubernetes "
+                        "isolation will be skipped"
+                    )
+                    logger.warning(pinned_description)
+                fds.add_forensic_timeline_event(
+                    id=forensic_record.id,
+                    name=pinned_name,
+                    description=pinned_description,
+                    phase=ForensicsProcessingPhase.TRIAGE,
+                    component_id="triage",
+                    component_type="Lambda",
+                    event_data={
+                        "instanceId": pinned_instance_id,
+                        "clusterName": cluster_name,
+                        "nodeConfirmed": node_confirmed,
+                        "confirmationMethod": confirmation_method,
+                    },
+                )
             affected_instance_info_list = []
             for each_affected_node in affected_node_list:
                 instance_info = clean_date_format(
@@ -278,6 +333,7 @@ def lambda_handler(event, context):
                     "affectedResourceNamespace": affected_resource_namespace,
                     "affectedNode": affected_node_list,
                     "instanceInfo": affected_instance_info_list,
+                    "nodeConfirmed": node_confirmed,
                 }
             )
             fds.add_forensic_timeline_event(
@@ -419,22 +475,151 @@ def is_triggered_by_fo_security_hub_custom_action(action_name):
         raise ValueError(f"Invalid event name: {action_name}")
 
 
+def _resource_account_region(resource) -> Tuple[str, str]:
+    try:
+        parsed_arn = arnparse(resource.get("Id", ""))
+    except Exception:
+        raise ValueError(
+            "Cannot determine account and region for EC2 instance and EKS "
+            "cluster in finding"
+        )
+    if not parsed_arn.account_id or not parsed_arn.region:
+        raise ValueError(
+            "Cannot determine account and region for EC2 instance and EKS "
+            "cluster in finding"
+        )
+    return parsed_arn.account_id, parsed_arn.region
+
+
+def _get_ec2_eks_pair(event) -> Optional[Tuple[dict, dict]]:
+    """
+    Return the (EC2, EKS) resources when the event holds exactly one of each.
+
+    GuardDuty Runtime Monitoring findings on EKS name both the node the
+    process ran on and the cluster. The pair is only accepted from a single
+    finding in one account and region; anything else fails closed.
+    """
+    ec2_resources = []
+    eks_resources = []
+    for index, finding in enumerate(event["detail"]["findings"]):
+        for resource in finding.get("Resources", []):
+            if resource.get("Type") == EC2_RESOURCE_TYPE:
+                ec2_resources.append((index, resource))
+            elif resource.get("Type") == EKS_RESOURCE_TYPE:
+                eks_resources.append((index, resource))
+
+    if len(ec2_resources) != 1 or len(eks_resources) != 1:
+        return None
+
+    ec2_index, ec2_resource = ec2_resources[0]
+    eks_index, eks_resource = eks_resources[0]
+    if ec2_index != eks_index:
+        raise ValueError(
+            "EC2 instance and EKS cluster must be in the same finding"
+        )
+    if _resource_account_region(ec2_resource) != _resource_account_region(
+        eks_resource
+    ):
+        raise ValueError(
+            "EC2 instance and EKS cluster in finding are in different "
+            "accounts or regions"
+        )
+    return ec2_resource, eks_resource
+
+
 def is_ec2_or_eks_in_scope(event):
     findings = event["detail"]["findings"]
-    resource_types = []
-    for finding in findings:
-        for resource in finding["Resources"]:
-            resource_types.append(resource["Type"])
-    if not resource_types:
+    resources = [r for f in findings for r in f.get("Resources", [])]
+    if not resources:
         raise ValueError(f"Invalid trigger event: {event}")
-    for each_resource in resource_types:
-        if each_resource not in ["AwsEc2Instance", "AwsEksCluster"]:
-            resource_types.remove(each_resource)
-    if len(resource_types) > 1:
-        raise ValueError(
-            f"More than one instance or EKS cluster in-scope for event: {event}"
+    ec2_count = sum(1 for r in resources if r.get("Type") == EC2_RESOURCE_TYPE)
+    eks_count = sum(1 for r in resources if r.get("Type") == EKS_RESOURCE_TYPE)
+    if ec2_count == 0 and eks_count == 0:
+        raise ValueError("No EC2 instance or EKS cluster in-scope for event")
+    if ec2_count == 1 and eks_count == 0:
+        return EC2_RESOURCE_TYPE
+    if ec2_count == 0 and eks_count == 1:
+        return EKS_RESOURCE_TYPE
+    if ec2_count == 1 and eks_count == 1:
+        # Raises when the pair is split, unparseable or mismatched.
+        _get_ec2_eks_pair(event)
+        return EKS_RESOURCE_TYPE
+    raise ValueError(
+        "More than one instance or EKS cluster in-scope for event: "
+        f"ec2={ec2_count}, eks={eks_count}"
+    )
+
+
+def get_pinned_node(event) -> Optional[dict]:
+    """
+    The EC2 node named by an EC2 + EKS finding, or None for other findings.
+
+    Must run before is_single_eks_cluster_in_scope, which drops the EC2
+    resource from the event.
+    """
+    pair = _get_ec2_eks_pair(event)
+    if not pair:
+        return None
+    ec2_resource, _ = pair
+    instance_id = arnparse(ec2_resource["Id"]).resource
+    if not instance_id or not instance_id.startswith("i-"):
+        raise ValueError("The EC2 Instance ID is missing in trigger event")
+    return {"instanceId": instance_id, "tags": ec2_resource.get("Tags") or {}}
+
+
+def is_node_tagged_for_cluster(tags, cluster_name) -> bool:
+    if not tags or not isinstance(tags, dict):
+        return False
+    if any(tags.get(key) == cluster_name for key in EKS_CLUSTER_NAME_TAG_KEYS):
+        return True
+    return f"kubernetes.io/cluster/{cluster_name}" in tags
+
+
+def confirm_node_in_cluster(
+    cluster_name, instance_id, eks_client, cluster_admin_role_arn
+) -> bool:
+    """
+    True when a node of the cluster has providerID aws:///<az>/<instance_id>.
+
+    Any error counts as not confirmed, so Kubernetes isolation is skipped.
+    """
+    try:
+        kubeconfig = get_eks_credentials(
+            cluster_name, eks_client, cluster_admin_role_arn
         )
-    return resource_types[0]
+        config.load_kube_config_from_dict(config_dict=kubeconfig)
+        api_instance = client.CoreV1Api()
+        token = None
+        while True:
+            response = api_instance.list_node(limit=100, _continue=token)
+            for node in response.items:
+                provider_id = node.spec.provider_id or ""
+                if provider_id.rsplit("/", 1)[-1] == instance_id:
+                    return True
+            token = response.metadata._continue
+            if not token:
+                break
+    except Exception as e:
+        logger.warning(
+            f"Could not confirm {instance_id} as a node of cluster "
+            f"{cluster_name}: {e.__class__.__name__}"
+        )
+    return False
+
+
+def confirm_pinned_node(
+    pinned_node, cluster_name, eks_client, cluster_admin_role_arn
+) -> Tuple[bool, str]:
+    if is_node_tagged_for_cluster(pinned_node.get("tags"), cluster_name):
+        return True, CONFIRMATION_TAG
+    if confirm_node_in_cluster(
+        cluster_name,
+        pinned_node["instanceId"],
+        eks_client,
+        cluster_admin_role_arn,
+    ):
+        return True, CONFIRMATION_KUBERNETES_API
+    return False, CONFIRMATION_UNCONFIRMED
 
 
 def is_single_ec2_instance_in_scope(event):
@@ -715,6 +900,20 @@ def get_affected_pods(
     return affected_pods
 
 
+def _get_eks_resource(event):
+    """
+    The AwsEksCluster resource of the first finding.
+
+    Falls back to the first resource for events whose resources carry no
+    Type, which is how the solution read them before Runtime findings.
+    """
+    resources = event["detail"]["findings"][0]["Resources"]
+    for resource in resources:
+        if resource.get("Type") == EKS_RESOURCE_TYPE:
+            return resource
+    return resources[0]
+
+
 def get_affected_resource_in_cluster(
     event, clustername, eks_client, cluster_admin_role_arn
 ):
@@ -739,19 +938,19 @@ def get_affected_resource_in_cluster(
     - Deployments
     - Individual pods
     """
-    user_detail = event["detail"]["findings"][0]["Resources"][0]["Details"][
-        "Other"
-    ]["kubernetesDetails/kubernetesUserDetails/username"]
+    other = _get_eks_resource(event).get("Details", {}).get("Other", {})
+    # Audit Log findings carry the Kubernetes username. Runtime Monitoring
+    # findings do not: kubernetesUserDetails is an empty string, and the
+    # workload details below name the pod instead.
+    user_detail = (
+        other.get("kubernetesDetails/kubernetesUserDetails/username") or ""
+    )
     if "serviceaccount" in user_detail:
         logger.info(
             "Service account detected, triggering service account rollout"
         )
         affected_resource_type = "ServiceAccount"
-        service_account_name_detail = event["detail"]["findings"][0][
-            "Resources"
-        ][0]["Details"]["Other"][
-            "kubernetesDetails/kubernetesUserDetails/username"
-        ]
+        service_account_name_detail = user_detail
         service_account = service_account_name_detail.split(":")[-1]
         affected_resource_namespace = service_account_name_detail.split(":")[
             -2
@@ -770,11 +969,15 @@ def get_affected_resource_in_cluster(
         affected_pod = []
         affected_resource_namespace = "none"
     else:
-        affected_resource_type = event["detail"]["findings"][0]["Resources"][
-            0
-        ]["Details"]["Other"][
-            "kubernetesDetails/kubernetesWorkloadDetails/type"
-        ].lower()
+        affected_resource_type = (
+            other.get("kubernetesDetails/kubernetesWorkloadDetails/type") or ""
+        ).lower()
+        workload_name = other.get(
+            "kubernetesDetails/kubernetesWorkloadDetails/name", ""
+        )
+        workload_namespace = other.get(
+            "kubernetesDetails/kubernetesWorkloadDetails/namespace", ""
+        )
         # `x == "deployments" or "deployment"` is always true: the second
         # operand is a non-empty string literal, not a comparison. Every
         # workload finding therefore took the Deployment branch and the Pods
@@ -783,16 +986,8 @@ def get_affected_resource_in_cluster(
         if affected_resource_type in ("deployments", "deployment"):
             logger.info("Deployment resource detected")
             affected_resource_type = "Deployment"
-            affected_deployment = event["detail"]["findings"][0]["Resources"][
-                0
-            ]["Details"]["Other"][
-                "kubernetesDetails/kubernetesWorkloadDetails/name"
-            ]
-            affected_resource_namespace = event["detail"]["findings"][0][
-                "Resources"
-            ][0]["Details"]["Other"][
-                "kubernetesDetails/kubernetesWorkloadDetails/namespace"
-            ]
+            affected_deployment = workload_name
+            affected_resource_namespace = workload_namespace
             affected_pod = get_affected_pods(
                 affected_resource_type,
                 clustername,
@@ -802,21 +997,15 @@ def get_affected_resource_in_cluster(
                 cluster_admin_role_arn,
             )
 
-        elif affected_resource_type == "pods":
+        elif (
+            affected_resource_type == "pods"
+            and workload_name
+            and workload_namespace
+        ):
             logger.info("Pods resource detected")
             affected_resource_type = "Pods"
-            affected_pod = event["detail"]["findings"][0]["Resources"][0][
-                "Details"
-            ]["Other"][
-                "kubernetesDetails/kubernetesWorkloadDetails/name"
-            ].split(
-                " "
-            )
-            affected_resource_namespace = event["detail"]["findings"][0][
-                "Resources"
-            ][0]["Details"]["Other"][
-                "kubernetesDetails/kubernetesWorkloadDetails/namespace"
-            ]
+            affected_pod = workload_name.split(" ")
+            affected_resource_namespace = workload_namespace
 
         else:
             affected_resource_type = "none"
